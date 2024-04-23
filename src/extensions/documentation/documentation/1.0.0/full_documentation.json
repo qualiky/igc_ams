@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-04-23T16:07:14.606Z"
+    "x-generation-date": "2024-04-23T17:24:42.674Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -93,9 +93,70 @@
         ],
         "properties": {
           "data": {
+            "required": [
+              "firstName",
+              "lastName",
+              "userName",
+              "gender",
+              "dateOfBirth",
+              "bloodGroup",
+              "maritalStatus",
+              "panNumber"
+            ],
             "type": "object",
             "properties": {
-              "name": {
+              "employeeIdentifier": {
+                "type": "string"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "middleName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "userName": {
+                "type": "string"
+              },
+              "gender": {
+                "$ref": "#/components/schemas/GenderGenderComponent"
+              },
+              "dateOfBirth": {
+                "type": "string",
+                "format": "date"
+              },
+              "bloodGroup": {
+                "type": "string",
+                "enum": [
+                  "A-Positive",
+                  "A-Negative",
+                  "B-Positive",
+                  "B-Negative",
+                  "AB-Positive",
+                  "AB-Negative",
+                  "O-Positive",
+                  "O-Negative"
+                ]
+              },
+              "maritalStatus": {
+                "type": "string",
+                "enum": [
+                  "Married",
+                  "Unmarried"
+                ]
+              },
+              "nationality": {
+                "type": "string"
+              },
+              "educationStatus": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EducationalQualificationEducationalQualificationComponent"
+                }
+              },
+              "panNumber": {
                 "type": "string"
               }
             }
@@ -150,8 +211,69 @@
       },
       "Employee": {
         "type": "object",
+        "required": [
+          "firstName",
+          "lastName",
+          "userName",
+          "gender",
+          "dateOfBirth",
+          "bloodGroup",
+          "maritalStatus",
+          "panNumber"
+        ],
         "properties": {
-          "name": {
+          "employeeIdentifier": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "middleName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderGenderComponent"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date"
+          },
+          "bloodGroup": {
+            "type": "string",
+            "enum": [
+              "A-Positive",
+              "A-Negative",
+              "B-Positive",
+              "B-Negative",
+              "AB-Positive",
+              "AB-Negative",
+              "O-Positive",
+              "O-Negative"
+            ]
+          },
+          "maritalStatus": {
+            "type": "string",
+            "enum": [
+              "Married",
+              "Unmarried"
+            ]
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "educationStatus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EducationalQualificationEducationalQualificationComponent"
+            }
+          },
+          "panNumber": {
             "type": "string"
           },
           "createdAt": {
@@ -473,6 +595,53 @@
           },
           "meta": {
             "type": "object"
+          }
+        }
+      },
+      "GenderGenderComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "genderType": {
+            "type": "string",
+            "enum": [
+              "Male",
+              "Female",
+              "Others",
+              "Prefer Not to Say"
+            ]
+          },
+          "customGenderType": {
+            "type": "string"
+          },
+          "pronouns": {
+            "type": "string"
+          }
+        }
+      },
+      "EducationalQualificationEducationalQualificationComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "programName": {
+            "type": "string"
+          },
+          "facultyName": {
+            "type": "string"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "Plus Two or Equivalent",
+              "Bachelors",
+              "Masters",
+              "MPhil",
+              "PhD"
+            ]
           }
         }
       },

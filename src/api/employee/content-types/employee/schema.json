@@ -4,15 +4,85 @@
   "info": {
     "singularName": "employee",
     "pluralName": "employees",
-    "displayName": "Employee"
+    "displayName": "Employee",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "employeeIdentifier": {
+      "type": "customField",
+      "customField": "plugin::strapi-advanced-uuid.uuid"
+    },
+    "firstName": {
+      "type": "string",
+      "required": true,
+      "maxLength": 64,
+      "minLength": 2
+    },
+    "middleName": {
       "type": "string"
+    },
+    "lastName": {
+      "type": "string",
+      "required": true,
+      "maxLength": 64,
+      "minLength": 2
+    },
+    "userName": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "minLength": 3
+    },
+    "gender": {
+      "type": "component",
+      "repeatable": false,
+      "component": "gender.gender",
+      "required": true
+    },
+    "dateOfBirth": {
+      "type": "date",
+      "required": true
+    },
+    "bloodGroup": {
+      "type": "enumeration",
+      "enum": [
+        "A-Positive",
+        "A-Negative",
+        "B-Positive",
+        "B-Negative",
+        "AB-Positive",
+        "AB-Negative",
+        "O-Positive",
+        "O-Negative"
+      ],
+      "required": true
+    },
+    "maritalStatus": {
+      "type": "enumeration",
+      "enum": [
+        "Married",
+        "Unmarried"
+      ],
+      "required": true
+    },
+    "nationality": {
+      "type": "customField",
+      "customField": "plugin::country-select.country"
+    },
+    "educationStatus": {
+      "type": "component",
+      "repeatable": true,
+      "component": "educational-qualification.educational-qualification"
+    },
+    "panNumber" : {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "minLength": 7
     }
   }
 }

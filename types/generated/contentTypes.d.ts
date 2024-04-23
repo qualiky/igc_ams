@@ -368,12 +368,62 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
     singularName: 'employee';
     pluralName: 'employees';
     displayName: 'Employee';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String;
+    employeeIdentifier: Attribute.UID &
+      Attribute.CustomField<'plugin::strapi-advanced-uuid.uuid'>;
+    firstName: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 2;
+        maxLength: 64;
+      }>;
+    middleName: Attribute.String;
+    lastName: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 2;
+        maxLength: 64;
+      }>;
+    userName: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 3;
+      }>;
+    gender: Attribute.Component<'gender.gender'> & Attribute.Required;
+    dateOfBirth: Attribute.Date & Attribute.Required;
+    bloodGroup: Attribute.Enumeration<
+      [
+        'A-Positive',
+        'A-Negative',
+        'B-Positive',
+        'B-Negative',
+        'AB-Positive',
+        'AB-Negative',
+        'O-Positive',
+        'O-Negative'
+      ]
+    > &
+      Attribute.Required;
+    maritalStatus: Attribute.Enumeration<['Married', 'Unmarried']> &
+      Attribute.Required;
+    nationality: Attribute.String &
+      Attribute.CustomField<'plugin::country-select.country'>;
+    educationStatus: Attribute.Component<
+      'educational-qualification.educational-qualification',
+      true
+    >;
+    panNumber: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 7;
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
