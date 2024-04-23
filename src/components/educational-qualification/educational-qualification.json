@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_educational_qualification_educational_qualifications",
+  "info": {
+    "displayName": "EducationalQualification",
+    "icon": "briefcase"
+  },
+  "options": {},
+  "attributes": {
+    "programName": {
+      "type": "string",
+      "required": true
+    },
+    "facultyName": {
+      "type": "string",
+      "required": true
+    },
+    "level": {
+      "type": "enumeration",
+      "enum": [
+        "Plus Two or Equivalent",
+        "Bachelors",
+        "Masters",
+        "MPhil",
+        "PhD"
+      ],
+      "required": true
+    }
+  }
+}

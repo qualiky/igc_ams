@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_gender_genders",
+  "info": {
+    "displayName": "Gender",
+    "icon": "user"
+  },
+  "options": {},
+  "attributes": {
+    "genderType": {
+      "type": "enumeration",
+      "enum": [
+        "Male",
+        "Female",
+        "Others",
+        "Prefer Not to Say"
+      ],
+      "required": true
+    },
+    "customGenderType": {
+      "type": "string"
+    },
+    "pronouns": {
+      "type": "string"
+    }
+  }
+}
