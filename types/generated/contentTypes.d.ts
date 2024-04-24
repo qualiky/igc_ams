@@ -362,6 +362,42 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiBankDetailBankDetail extends Schema.CollectionType {
+  collectionName: 'bank_details';
+  info: {
+    singularName: 'bank-detail';
+    pluralName: 'bank-details';
+    displayName: 'BankDetails';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    bankAccountNumber: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 12;
+        maxLength: 16;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::bank-detail.bank-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::bank-detail.bank-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiEmployeeEmployee extends Schema.CollectionType {
   collectionName: 'employees';
   info: {
@@ -424,6 +460,12 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       Attribute.SetMinMaxLength<{
         minLength: 7;
       }>;
+    existingMedicalCondition: Attribute.String;
+    personal_identification_info: Attribute.Relation<
+      'api::employee.employee',
+      'oneToOne',
+      'api::personal-identification-info.personal-identification-info'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -435,6 +477,231 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::employee.employee',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPersonalIdentificationInfoPersonalIdentificationInfo
+  extends Schema.CollectionType {
+  collectionName: 'personal_identification_infos';
+  info: {
+    singularName: 'personal-identification-info';
+    pluralName: 'personal-identification-infos';
+    displayName: 'PersonalIdentificationInfo';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    citizenshipNumber: Attribute.String & Attribute.Required;
+    nationalIdNumber: Attribute.String & Attribute.Unique;
+    citizenshipIssuedProvince: Attribute.Enumeration<
+      [
+        'Koshi (Province 1)',
+        'Madhesh (Province 2)',
+        'Bagmai (Province 3)',
+        'Gandaki (Province 4)',
+        'Lumbini (Province 5)',
+        'Karnali (Province 6)',
+        'Sudurpashchim (Province 7)'
+      ]
+    > &
+      Attribute.Required;
+    citizenshipIssuedDistrict: Attribute.Enumeration<
+      [
+        'Achham',
+        'Arghakhanchi',
+        'Baglung',
+        'Baitadi',
+        'Bajhang',
+        'Bajura',
+        'Banke',
+        'Bara',
+        'Bardiya',
+        'Bhaktapur',
+        'Bhojpur',
+        'Chitwan',
+        'Dadeldhura',
+        'Dailekh',
+        'Dang',
+        'Darchula',
+        'Dhading',
+        'Dhankuta',
+        'Dhanusa',
+        'Dholkha',
+        'Dolpa',
+        'Doti',
+        'Gorkha',
+        'Gulmi',
+        'Humla',
+        'Ilam',
+        'Jajarkot',
+        'Jhapa',
+        'Jumla',
+        'Kailali',
+        'Kalikot',
+        'Kanchanpur',
+        'Kapilvastu',
+        'Kaski',
+        'Kathmandu',
+        'Kavrepalanchok',
+        'Khotang',
+        'Lalitpur',
+        'Lamjung',
+        'Mahottari',
+        'Makwanpur',
+        'Manang',
+        'Morang',
+        'Mugu',
+        'Mustang',
+        'Myagdi',
+        'Nawalparasi',
+        'Nawalpur',
+        'Nuwakot',
+        'Okhaldhunga',
+        'Palpa',
+        'Panchthar',
+        'Parbat',
+        'Parsa',
+        'Pyuthan',
+        'Ramechhap',
+        'Rasuwa',
+        'Rautahat',
+        'Rolpa',
+        'Rukum',
+        'Rukum West',
+        'Rupandehi',
+        'Salyan',
+        'Sankhuwasabha',
+        'Saptari',
+        'Sarlahi',
+        'Sindhuli',
+        'Sindhupalchok',
+        'Siraha',
+        'Solukhumbu',
+        'Sunsari',
+        'Surkhet',
+        'Syangja',
+        'Tanahu',
+        'Taplejung',
+        'Terhathum',
+        'Udayapur'
+      ]
+    > &
+      Attribute.Required;
+    issuedMunicipalRegion: Attribute.String & Attribute.Required;
+    citizenshipIssueDate: Attribute.Date & Attribute.Required;
+    citizenshipIssueProvince: Attribute.Enumeration<
+      [
+        'Koshi (Province 1)',
+        'Madhesh (Province 2)',
+        'Bagmai (Province 3)',
+        'Gandaki (Province 4)',
+        'Lumbini (Province 5)',
+        'Karnali (Province 6)',
+        'Sudurpashchim (Province 7)'
+      ]
+    > &
+      Attribute.Required;
+    passportNumber: Attribute.String;
+    panNumber: Attribute.String & Attribute.Unique;
+    panIssueDistrict: Attribute.Enumeration<
+      [
+        'Achham',
+        'Arghakhanchi',
+        'Baglung',
+        'Baitadi',
+        'Bajhang',
+        'Bajura',
+        'Banke',
+        'Bara',
+        'Bardiya',
+        'Bhaktapur',
+        'Bhojpur',
+        'Chitwan',
+        'Dadeldhura',
+        'Dailekh',
+        'Dang',
+        'Darchula',
+        'Dhading',
+        'Dhankuta',
+        'Dhanusa',
+        'Dholkha',
+        'Dolpa',
+        'Doti',
+        'Gorkha',
+        'Gulmi',
+        'Humla',
+        'Ilam',
+        'Jajarkot',
+        'Jhapa',
+        'Jumla',
+        'Kailali',
+        'Kalikot',
+        'Kanchanpur',
+        'Kapilvastu',
+        'Kaski',
+        'Kathmandu',
+        'Kavrepalanchok',
+        'Khotang',
+        'Lalitpur',
+        'Lamjung',
+        'Mahottari',
+        'Makwanpur',
+        'Manang',
+        'Morang',
+        'Mugu',
+        'Mustang',
+        'Myagdi',
+        'Nawalparasi',
+        'Nawalpur',
+        'Nuwakot',
+        'Okhaldhunga',
+        'Palpa',
+        'Panchthar',
+        'Parbat',
+        'Parsa',
+        'Pyuthan',
+        'Ramechhap',
+        'Rasuwa',
+        'Rautahat',
+        'Rolpa',
+        'Rukum',
+        'Rukum West',
+        'Rupandehi',
+        'Salyan',
+        'Sankhuwasabha',
+        'Saptari',
+        'Sarlahi',
+        'Sindhuli',
+        'Sindhupalchok',
+        'Siraha',
+        'Solukhumbu',
+        'Sunsari',
+        'Surkhet',
+        'Syangja',
+        'Tanahu',
+        'Taplejung',
+        'Terhathum',
+        'Udayapur'
+      ]
+    >;
+    panIssueDate: Attribute.Date;
+    piiRemarks: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::personal-identification-info.personal-identification-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::personal-identification-info.personal-identification-info',
       'oneToOne',
       'admin::user'
     > &
@@ -878,7 +1145,9 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::bank-detail.bank-detail': ApiBankDetailBankDetail;
       'api::employee.employee': ApiEmployeeEmployee;
+      'api::personal-identification-info.personal-identification-info': ApiPersonalIdentificationInfoPersonalIdentificationInfo;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

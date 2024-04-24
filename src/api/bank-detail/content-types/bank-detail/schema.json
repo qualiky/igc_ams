@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bank_details",
+  "info": {
+    "singularName": "bank-detail",
+    "pluralName": "bank-details",
+    "displayName": "BankDetails"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "bankAccountNumber": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 16,
+      "minLength": 12
+    }
+  }
+}

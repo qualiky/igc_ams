@@ -78,11 +78,20 @@
       "repeatable": true,
       "component": "educational-qualification.educational-qualification"
     },
-    "panNumber" : {
+    "panNumber": {
       "type": "string",
       "required": true,
       "unique": true,
       "minLength": 7
+    },
+    "existingMedicalCondition": {
+      "type": "string",
+      "required": false
+    },
+    "personal_identification_info": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::personal-identification-info.personal-identification-info"
     }
   }
 }

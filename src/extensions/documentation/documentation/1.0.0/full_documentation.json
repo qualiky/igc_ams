@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-04-23T17:24:42.674Z"
+    "x-generation-date": "2024-04-24T00:57:27.554Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -86,7 +86,7 @@
           }
         }
       },
-      "EmployeeRequest": {
+      "BankDetailRequest": {
         "type": "object",
         "required": [
           "data"
@@ -94,93 +94,35 @@
         "properties": {
           "data": {
             "required": [
-              "firstName",
-              "lastName",
-              "userName",
-              "gender",
-              "dateOfBirth",
-              "bloodGroup",
-              "maritalStatus",
-              "panNumber"
+              "bankAccountNumber"
             ],
             "type": "object",
             "properties": {
-              "employeeIdentifier": {
-                "type": "string"
-              },
-              "firstName": {
-                "type": "string"
-              },
-              "middleName": {
-                "type": "string"
-              },
-              "lastName": {
-                "type": "string"
-              },
-              "userName": {
-                "type": "string"
-              },
-              "gender": {
-                "$ref": "#/components/schemas/GenderGenderComponent"
-              },
-              "dateOfBirth": {
-                "type": "string",
-                "format": "date"
-              },
-              "bloodGroup": {
-                "type": "string",
-                "enum": [
-                  "A-Positive",
-                  "A-Negative",
-                  "B-Positive",
-                  "B-Negative",
-                  "AB-Positive",
-                  "AB-Negative",
-                  "O-Positive",
-                  "O-Negative"
-                ]
-              },
-              "maritalStatus": {
-                "type": "string",
-                "enum": [
-                  "Married",
-                  "Unmarried"
-                ]
-              },
-              "nationality": {
-                "type": "string"
-              },
-              "educationStatus": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/EducationalQualificationEducationalQualificationComponent"
-                }
-              },
-              "panNumber": {
+              "bankAccountNumber": {
                 "type": "string"
               }
             }
           }
         }
       },
-      "EmployeeListResponseDataItem": {
+      "BankDetailListResponseDataItem": {
         "type": "object",
         "properties": {
           "id": {
             "type": "number"
           },
           "attributes": {
-            "$ref": "#/components/schemas/Employee"
+            "$ref": "#/components/schemas/BankDetail"
           }
         }
       },
-      "EmployeeListResponse": {
+      "BankDetailListResponse": {
         "type": "object",
         "properties": {
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/EmployeeListResponseDataItem"
+              "$ref": "#/components/schemas/BankDetailListResponseDataItem"
             }
           },
           "meta": {
@@ -209,71 +151,13 @@
           }
         }
       },
-      "Employee": {
+      "BankDetail": {
         "type": "object",
         "required": [
-          "firstName",
-          "lastName",
-          "userName",
-          "gender",
-          "dateOfBirth",
-          "bloodGroup",
-          "maritalStatus",
-          "panNumber"
+          "bankAccountNumber"
         ],
         "properties": {
-          "employeeIdentifier": {
-            "type": "string"
-          },
-          "firstName": {
-            "type": "string"
-          },
-          "middleName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "userName": {
-            "type": "string"
-          },
-          "gender": {
-            "$ref": "#/components/schemas/GenderGenderComponent"
-          },
-          "dateOfBirth": {
-            "type": "string",
-            "format": "date"
-          },
-          "bloodGroup": {
-            "type": "string",
-            "enum": [
-              "A-Positive",
-              "A-Negative",
-              "B-Positive",
-              "B-Negative",
-              "AB-Positive",
-              "AB-Negative",
-              "O-Positive",
-              "O-Negative"
-            ]
-          },
-          "maritalStatus": {
-            "type": "string",
-            "enum": [
-              "Married",
-              "Unmarried"
-            ]
-          },
-          "nationality": {
-            "type": "string"
-          },
-          "educationStatus": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EducationalQualificationEducationalQualificationComponent"
-            }
-          },
-          "panNumber": {
+          "bankAccountNumber": {
             "type": "string"
           },
           "createdAt": {
@@ -576,6 +460,813 @@
           }
         }
       },
+      "BankDetailResponseDataObject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/BankDetail"
+          }
+        }
+      },
+      "BankDetailResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/BankDetailResponseDataObject"
+          },
+          "meta": {
+            "type": "object"
+          }
+        }
+      },
+      "EmployeeRequest": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "required": [
+              "firstName",
+              "lastName",
+              "userName",
+              "gender",
+              "dateOfBirth",
+              "bloodGroup",
+              "maritalStatus",
+              "panNumber"
+            ],
+            "type": "object",
+            "properties": {
+              "employeeIdentifier": {
+                "type": "string"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "middleName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "userName": {
+                "type": "string"
+              },
+              "gender": {
+                "$ref": "#/components/schemas/GenderGenderComponent"
+              },
+              "dateOfBirth": {
+                "type": "string",
+                "format": "date"
+              },
+              "bloodGroup": {
+                "type": "string",
+                "enum": [
+                  "A-Positive",
+                  "A-Negative",
+                  "B-Positive",
+                  "B-Negative",
+                  "AB-Positive",
+                  "AB-Negative",
+                  "O-Positive",
+                  "O-Negative"
+                ]
+              },
+              "maritalStatus": {
+                "type": "string",
+                "enum": [
+                  "Married",
+                  "Unmarried"
+                ]
+              },
+              "nationality": {
+                "type": "string"
+              },
+              "educationStatus": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EducationalQualificationEducationalQualificationComponent"
+                }
+              },
+              "panNumber": {
+                "type": "string"
+              },
+              "existingMedicalCondition": {
+                "type": "string"
+              },
+              "personal_identification_info": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
+              }
+            }
+          }
+        }
+      },
+      "EmployeeListResponseDataItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/Employee"
+          }
+        }
+      },
+      "EmployeeListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmployeeListResponseDataItem"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "pagination": {
+                "type": "object",
+                "properties": {
+                  "page": {
+                    "type": "integer"
+                  },
+                  "pageSize": {
+                    "type": "integer",
+                    "minimum": 25
+                  },
+                  "pageCount": {
+                    "type": "integer",
+                    "maximum": 1
+                  },
+                  "total": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Employee": {
+        "type": "object",
+        "required": [
+          "firstName",
+          "lastName",
+          "userName",
+          "gender",
+          "dateOfBirth",
+          "bloodGroup",
+          "maritalStatus",
+          "panNumber"
+        ],
+        "properties": {
+          "employeeIdentifier": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "middleName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderGenderComponent"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date"
+          },
+          "bloodGroup": {
+            "type": "string",
+            "enum": [
+              "A-Positive",
+              "A-Negative",
+              "B-Positive",
+              "B-Negative",
+              "AB-Positive",
+              "AB-Negative",
+              "O-Positive",
+              "O-Negative"
+            ]
+          },
+          "maritalStatus": {
+            "type": "string",
+            "enum": [
+              "Married",
+              "Unmarried"
+            ]
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "educationStatus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EducationalQualificationEducationalQualificationComponent"
+            }
+          },
+          "panNumber": {
+            "type": "string"
+          },
+          "existingMedicalCondition": {
+            "type": "string"
+          },
+          "personal_identification_info": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "properties": {
+                      "citizenshipNumber": {
+                        "type": "string"
+                      },
+                      "nationalIdNumber": {
+                        "type": "string"
+                      },
+                      "citizenshipIssuedProvince": {
+                        "type": "string",
+                        "enum": [
+                          "Koshi (Province 1)",
+                          "Madhesh (Province 2)",
+                          "Bagmai (Province 3)",
+                          "Gandaki (Province 4)",
+                          "Lumbini (Province 5)",
+                          "Karnali (Province 6)",
+                          "Sudurpashchim (Province 7)"
+                        ]
+                      },
+                      "citizenshipIssuedDistrict": {
+                        "type": "string",
+                        "enum": [
+                          "Achham",
+                          "Arghakhanchi",
+                          "Baglung",
+                          "Baitadi",
+                          "Bajhang",
+                          "Bajura",
+                          "Banke",
+                          "Bara",
+                          "Bardiya",
+                          "Bhaktapur",
+                          "Bhojpur",
+                          "Chitwan",
+                          "Dadeldhura",
+                          "Dailekh",
+                          "Dang",
+                          "Darchula",
+                          "Dhading",
+                          "Dhankuta",
+                          "Dhanusa",
+                          "Dholkha",
+                          "Dolpa",
+                          "Doti",
+                          "Gorkha",
+                          "Gulmi",
+                          "Humla",
+                          "Ilam",
+                          "Jajarkot",
+                          "Jhapa",
+                          "Jumla",
+                          "Kailali",
+                          "Kalikot",
+                          "Kanchanpur",
+                          "Kapilvastu",
+                          "Kaski",
+                          "Kathmandu",
+                          "Kavrepalanchok",
+                          "Khotang",
+                          "Lalitpur",
+                          "Lamjung",
+                          "Mahottari",
+                          "Makwanpur",
+                          "Manang",
+                          "Morang",
+                          "Mugu",
+                          "Mustang",
+                          "Myagdi",
+                          "Nawalparasi",
+                          "Nawalpur",
+                          "Nuwakot",
+                          "Okhaldhunga",
+                          "Palpa",
+                          "Panchthar",
+                          "Parbat",
+                          "Parsa",
+                          "Pyuthan",
+                          "Ramechhap",
+                          "Rasuwa",
+                          "Rautahat",
+                          "Rolpa",
+                          "Rukum",
+                          "Rukum West",
+                          "Rupandehi",
+                          "Salyan",
+                          "Sankhuwasabha",
+                          "Saptari",
+                          "Sarlahi",
+                          "Sindhuli",
+                          "Sindhupalchok",
+                          "Siraha",
+                          "Solukhumbu",
+                          "Sunsari",
+                          "Surkhet",
+                          "Syangja",
+                          "Tanahu",
+                          "Taplejung",
+                          "Terhathum",
+                          "Udayapur"
+                        ]
+                      },
+                      "issuedMunicipalRegion": {
+                        "type": "string"
+                      },
+                      "citizenshipIssueDate": {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "citizenshipIssueProvince": {
+                        "type": "string",
+                        "enum": [
+                          "Koshi (Province 1)",
+                          "Madhesh (Province 2)",
+                          "Bagmai (Province 3)",
+                          "Gandaki (Province 4)",
+                          "Lumbini (Province 5)",
+                          "Karnali (Province 6)",
+                          "Sudurpashchim (Province 7)"
+                        ]
+                      },
+                      "passportNumber": {
+                        "type": "string"
+                      },
+                      "panNumber": {
+                        "type": "string"
+                      },
+                      "panIssueDistrict": {
+                        "type": "string",
+                        "enum": [
+                          "Achham",
+                          "Arghakhanchi",
+                          "Baglung",
+                          "Baitadi",
+                          "Bajhang",
+                          "Bajura",
+                          "Banke",
+                          "Bara",
+                          "Bardiya",
+                          "Bhaktapur",
+                          "Bhojpur",
+                          "Chitwan",
+                          "Dadeldhura",
+                          "Dailekh",
+                          "Dang",
+                          "Darchula",
+                          "Dhading",
+                          "Dhankuta",
+                          "Dhanusa",
+                          "Dholkha",
+                          "Dolpa",
+                          "Doti",
+                          "Gorkha",
+                          "Gulmi",
+                          "Humla",
+                          "Ilam",
+                          "Jajarkot",
+                          "Jhapa",
+                          "Jumla",
+                          "Kailali",
+                          "Kalikot",
+                          "Kanchanpur",
+                          "Kapilvastu",
+                          "Kaski",
+                          "Kathmandu",
+                          "Kavrepalanchok",
+                          "Khotang",
+                          "Lalitpur",
+                          "Lamjung",
+                          "Mahottari",
+                          "Makwanpur",
+                          "Manang",
+                          "Morang",
+                          "Mugu",
+                          "Mustang",
+                          "Myagdi",
+                          "Nawalparasi",
+                          "Nawalpur",
+                          "Nuwakot",
+                          "Okhaldhunga",
+                          "Palpa",
+                          "Panchthar",
+                          "Parbat",
+                          "Parsa",
+                          "Pyuthan",
+                          "Ramechhap",
+                          "Rasuwa",
+                          "Rautahat",
+                          "Rolpa",
+                          "Rukum",
+                          "Rukum West",
+                          "Rupandehi",
+                          "Salyan",
+                          "Sankhuwasabha",
+                          "Saptari",
+                          "Sarlahi",
+                          "Sindhuli",
+                          "Sindhupalchok",
+                          "Siraha",
+                          "Solukhumbu",
+                          "Sunsari",
+                          "Surkhet",
+                          "Syangja",
+                          "Tanahu",
+                          "Taplejung",
+                          "Terhathum",
+                          "Udayapur"
+                        ]
+                      },
+                      "panIssueDate": {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "piiRemarks": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "publishedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "createdBy": {
+                        "type": "object",
+                        "properties": {
+                          "data": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "attributes": {
+                                "type": "object",
+                                "properties": {
+                                  "firstname": {
+                                    "type": "string"
+                                  },
+                                  "lastname": {
+                                    "type": "string"
+                                  },
+                                  "username": {
+                                    "type": "string"
+                                  },
+                                  "email": {
+                                    "type": "string",
+                                    "format": "email"
+                                  },
+                                  "resetPasswordToken": {
+                                    "type": "string"
+                                  },
+                                  "registrationToken": {
+                                    "type": "string"
+                                  },
+                                  "isActive": {
+                                    "type": "boolean"
+                                  },
+                                  "roles": {
+                                    "type": "object",
+                                    "properties": {
+                                      "data": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "number"
+                                            },
+                                            "attributes": {
+                                              "type": "object",
+                                              "properties": {
+                                                "name": {
+                                                  "type": "string"
+                                                },
+                                                "code": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "users": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "data": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "id": {
+                                                            "type": "number"
+                                                          },
+                                                          "attributes": {
+                                                            "type": "object",
+                                                            "properties": {}
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                "permissions": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "data": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "id": {
+                                                            "type": "number"
+                                                          },
+                                                          "attributes": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "action": {
+                                                                "type": "string"
+                                                              },
+                                                              "actionParameters": {},
+                                                              "subject": {
+                                                                "type": "string"
+                                                              },
+                                                              "properties": {},
+                                                              "conditions": {},
+                                                              "role": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                  "data": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                      "id": {
+                                                                        "type": "number"
+                                                                      },
+                                                                      "attributes": {
+                                                                        "type": "object",
+                                                                        "properties": {}
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              },
+                                                              "createdAt": {
+                                                                "type": "string",
+                                                                "format": "date-time"
+                                                              },
+                                                              "updatedAt": {
+                                                                "type": "string",
+                                                                "format": "date-time"
+                                                              },
+                                                              "createdBy": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                  "data": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                      "id": {
+                                                                        "type": "number"
+                                                                      },
+                                                                      "attributes": {
+                                                                        "type": "object",
+                                                                        "properties": {}
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              },
+                                                              "updatedBy": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                  "data": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                      "id": {
+                                                                        "type": "number"
+                                                                      },
+                                                                      "attributes": {
+                                                                        "type": "object",
+                                                                        "properties": {}
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                "createdAt": {
+                                                  "type": "string",
+                                                  "format": "date-time"
+                                                },
+                                                "updatedAt": {
+                                                  "type": "string",
+                                                  "format": "date-time"
+                                                },
+                                                "createdBy": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "data": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "id": {
+                                                          "type": "number"
+                                                        },
+                                                        "attributes": {
+                                                          "type": "object",
+                                                          "properties": {}
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                "updatedBy": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "data": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "id": {
+                                                          "type": "number"
+                                                        },
+                                                        "attributes": {
+                                                          "type": "object",
+                                                          "properties": {}
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "blocked": {
+                                    "type": "boolean"
+                                  },
+                                  "preferedLanguage": {
+                                    "type": "string"
+                                  },
+                                  "createdAt": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "updatedAt": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "createdBy": {
+                                    "type": "object",
+                                    "properties": {
+                                      "data": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "number"
+                                          },
+                                          "attributes": {
+                                            "type": "object",
+                                            "properties": {}
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "updatedBy": {
+                                    "type": "object",
+                                    "properties": {
+                                      "data": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "number"
+                                          },
+                                          "attributes": {
+                                            "type": "object",
+                                            "properties": {}
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "updatedBy": {
+                        "type": "object",
+                        "properties": {
+                          "data": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "attributes": {
+                                "type": "object",
+                                "properties": {}
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "publishedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              }
+            }
+          },
+          "updatedBy": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "EmployeeResponseDataObject": {
         "type": "object",
         "properties": {
@@ -642,6 +1333,834 @@
               "MPhil",
               "PhD"
             ]
+          }
+        }
+      },
+      "PersonalIdentificationInfoRequest": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "required": [
+              "citizenshipNumber",
+              "citizenshipIssuedProvince",
+              "citizenshipIssuedDistrict",
+              "issuedMunicipalRegion",
+              "citizenshipIssueDate",
+              "citizenshipIssueProvince"
+            ],
+            "type": "object",
+            "properties": {
+              "citizenshipNumber": {
+                "type": "string"
+              },
+              "nationalIdNumber": {
+                "type": "string"
+              },
+              "citizenshipIssuedProvince": {
+                "type": "string",
+                "enum": [
+                  "Koshi (Province 1)",
+                  "Madhesh (Province 2)",
+                  "Bagmai (Province 3)",
+                  "Gandaki (Province 4)",
+                  "Lumbini (Province 5)",
+                  "Karnali (Province 6)",
+                  "Sudurpashchim (Province 7)"
+                ]
+              },
+              "citizenshipIssuedDistrict": {
+                "type": "string",
+                "enum": [
+                  "Achham",
+                  "Arghakhanchi",
+                  "Baglung",
+                  "Baitadi",
+                  "Bajhang",
+                  "Bajura",
+                  "Banke",
+                  "Bara",
+                  "Bardiya",
+                  "Bhaktapur",
+                  "Bhojpur",
+                  "Chitwan",
+                  "Dadeldhura",
+                  "Dailekh",
+                  "Dang",
+                  "Darchula",
+                  "Dhading",
+                  "Dhankuta",
+                  "Dhanusa",
+                  "Dholkha",
+                  "Dolpa",
+                  "Doti",
+                  "Gorkha",
+                  "Gulmi",
+                  "Humla",
+                  "Ilam",
+                  "Jajarkot",
+                  "Jhapa",
+                  "Jumla",
+                  "Kailali",
+                  "Kalikot",
+                  "Kanchanpur",
+                  "Kapilvastu",
+                  "Kaski",
+                  "Kathmandu",
+                  "Kavrepalanchok",
+                  "Khotang",
+                  "Lalitpur",
+                  "Lamjung",
+                  "Mahottari",
+                  "Makwanpur",
+                  "Manang",
+                  "Morang",
+                  "Mugu",
+                  "Mustang",
+                  "Myagdi",
+                  "Nawalparasi",
+                  "Nawalpur",
+                  "Nuwakot",
+                  "Okhaldhunga",
+                  "Palpa",
+                  "Panchthar",
+                  "Parbat",
+                  "Parsa",
+                  "Pyuthan",
+                  "Ramechhap",
+                  "Rasuwa",
+                  "Rautahat",
+                  "Rolpa",
+                  "Rukum",
+                  "Rukum West",
+                  "Rupandehi",
+                  "Salyan",
+                  "Sankhuwasabha",
+                  "Saptari",
+                  "Sarlahi",
+                  "Sindhuli",
+                  "Sindhupalchok",
+                  "Siraha",
+                  "Solukhumbu",
+                  "Sunsari",
+                  "Surkhet",
+                  "Syangja",
+                  "Tanahu",
+                  "Taplejung",
+                  "Terhathum",
+                  "Udayapur"
+                ]
+              },
+              "issuedMunicipalRegion": {
+                "type": "string"
+              },
+              "citizenshipIssueDate": {
+                "type": "string",
+                "format": "date"
+              },
+              "citizenshipIssueProvince": {
+                "type": "string",
+                "enum": [
+                  "Koshi (Province 1)",
+                  "Madhesh (Province 2)",
+                  "Bagmai (Province 3)",
+                  "Gandaki (Province 4)",
+                  "Lumbini (Province 5)",
+                  "Karnali (Province 6)",
+                  "Sudurpashchim (Province 7)"
+                ]
+              },
+              "passportNumber": {
+                "type": "string"
+              },
+              "panNumber": {
+                "type": "string"
+              },
+              "panIssueDistrict": {
+                "type": "string",
+                "enum": [
+                  "Achham",
+                  "Arghakhanchi",
+                  "Baglung",
+                  "Baitadi",
+                  "Bajhang",
+                  "Bajura",
+                  "Banke",
+                  "Bara",
+                  "Bardiya",
+                  "Bhaktapur",
+                  "Bhojpur",
+                  "Chitwan",
+                  "Dadeldhura",
+                  "Dailekh",
+                  "Dang",
+                  "Darchula",
+                  "Dhading",
+                  "Dhankuta",
+                  "Dhanusa",
+                  "Dholkha",
+                  "Dolpa",
+                  "Doti",
+                  "Gorkha",
+                  "Gulmi",
+                  "Humla",
+                  "Ilam",
+                  "Jajarkot",
+                  "Jhapa",
+                  "Jumla",
+                  "Kailali",
+                  "Kalikot",
+                  "Kanchanpur",
+                  "Kapilvastu",
+                  "Kaski",
+                  "Kathmandu",
+                  "Kavrepalanchok",
+                  "Khotang",
+                  "Lalitpur",
+                  "Lamjung",
+                  "Mahottari",
+                  "Makwanpur",
+                  "Manang",
+                  "Morang",
+                  "Mugu",
+                  "Mustang",
+                  "Myagdi",
+                  "Nawalparasi",
+                  "Nawalpur",
+                  "Nuwakot",
+                  "Okhaldhunga",
+                  "Palpa",
+                  "Panchthar",
+                  "Parbat",
+                  "Parsa",
+                  "Pyuthan",
+                  "Ramechhap",
+                  "Rasuwa",
+                  "Rautahat",
+                  "Rolpa",
+                  "Rukum",
+                  "Rukum West",
+                  "Rupandehi",
+                  "Salyan",
+                  "Sankhuwasabha",
+                  "Saptari",
+                  "Sarlahi",
+                  "Sindhuli",
+                  "Sindhupalchok",
+                  "Siraha",
+                  "Solukhumbu",
+                  "Sunsari",
+                  "Surkhet",
+                  "Syangja",
+                  "Tanahu",
+                  "Taplejung",
+                  "Terhathum",
+                  "Udayapur"
+                ]
+              },
+              "panIssueDate": {
+                "type": "string",
+                "format": "date"
+              },
+              "piiRemarks": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "PersonalIdentificationInfoListResponseDataItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/PersonalIdentificationInfo"
+          }
+        }
+      },
+      "PersonalIdentificationInfoListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PersonalIdentificationInfoListResponseDataItem"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "pagination": {
+                "type": "object",
+                "properties": {
+                  "page": {
+                    "type": "integer"
+                  },
+                  "pageSize": {
+                    "type": "integer",
+                    "minimum": 25
+                  },
+                  "pageCount": {
+                    "type": "integer",
+                    "maximum": 1
+                  },
+                  "total": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "PersonalIdentificationInfo": {
+        "type": "object",
+        "required": [
+          "citizenshipNumber",
+          "citizenshipIssuedProvince",
+          "citizenshipIssuedDistrict",
+          "issuedMunicipalRegion",
+          "citizenshipIssueDate",
+          "citizenshipIssueProvince"
+        ],
+        "properties": {
+          "citizenshipNumber": {
+            "type": "string"
+          },
+          "nationalIdNumber": {
+            "type": "string"
+          },
+          "citizenshipIssuedProvince": {
+            "type": "string",
+            "enum": [
+              "Koshi (Province 1)",
+              "Madhesh (Province 2)",
+              "Bagmai (Province 3)",
+              "Gandaki (Province 4)",
+              "Lumbini (Province 5)",
+              "Karnali (Province 6)",
+              "Sudurpashchim (Province 7)"
+            ]
+          },
+          "citizenshipIssuedDistrict": {
+            "type": "string",
+            "enum": [
+              "Achham",
+              "Arghakhanchi",
+              "Baglung",
+              "Baitadi",
+              "Bajhang",
+              "Bajura",
+              "Banke",
+              "Bara",
+              "Bardiya",
+              "Bhaktapur",
+              "Bhojpur",
+              "Chitwan",
+              "Dadeldhura",
+              "Dailekh",
+              "Dang",
+              "Darchula",
+              "Dhading",
+              "Dhankuta",
+              "Dhanusa",
+              "Dholkha",
+              "Dolpa",
+              "Doti",
+              "Gorkha",
+              "Gulmi",
+              "Humla",
+              "Ilam",
+              "Jajarkot",
+              "Jhapa",
+              "Jumla",
+              "Kailali",
+              "Kalikot",
+              "Kanchanpur",
+              "Kapilvastu",
+              "Kaski",
+              "Kathmandu",
+              "Kavrepalanchok",
+              "Khotang",
+              "Lalitpur",
+              "Lamjung",
+              "Mahottari",
+              "Makwanpur",
+              "Manang",
+              "Morang",
+              "Mugu",
+              "Mustang",
+              "Myagdi",
+              "Nawalparasi",
+              "Nawalpur",
+              "Nuwakot",
+              "Okhaldhunga",
+              "Palpa",
+              "Panchthar",
+              "Parbat",
+              "Parsa",
+              "Pyuthan",
+              "Ramechhap",
+              "Rasuwa",
+              "Rautahat",
+              "Rolpa",
+              "Rukum",
+              "Rukum West",
+              "Rupandehi",
+              "Salyan",
+              "Sankhuwasabha",
+              "Saptari",
+              "Sarlahi",
+              "Sindhuli",
+              "Sindhupalchok",
+              "Siraha",
+              "Solukhumbu",
+              "Sunsari",
+              "Surkhet",
+              "Syangja",
+              "Tanahu",
+              "Taplejung",
+              "Terhathum",
+              "Udayapur"
+            ]
+          },
+          "issuedMunicipalRegion": {
+            "type": "string"
+          },
+          "citizenshipIssueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "citizenshipIssueProvince": {
+            "type": "string",
+            "enum": [
+              "Koshi (Province 1)",
+              "Madhesh (Province 2)",
+              "Bagmai (Province 3)",
+              "Gandaki (Province 4)",
+              "Lumbini (Province 5)",
+              "Karnali (Province 6)",
+              "Sudurpashchim (Province 7)"
+            ]
+          },
+          "passportNumber": {
+            "type": "string"
+          },
+          "panNumber": {
+            "type": "string"
+          },
+          "panIssueDistrict": {
+            "type": "string",
+            "enum": [
+              "Achham",
+              "Arghakhanchi",
+              "Baglung",
+              "Baitadi",
+              "Bajhang",
+              "Bajura",
+              "Banke",
+              "Bara",
+              "Bardiya",
+              "Bhaktapur",
+              "Bhojpur",
+              "Chitwan",
+              "Dadeldhura",
+              "Dailekh",
+              "Dang",
+              "Darchula",
+              "Dhading",
+              "Dhankuta",
+              "Dhanusa",
+              "Dholkha",
+              "Dolpa",
+              "Doti",
+              "Gorkha",
+              "Gulmi",
+              "Humla",
+              "Ilam",
+              "Jajarkot",
+              "Jhapa",
+              "Jumla",
+              "Kailali",
+              "Kalikot",
+              "Kanchanpur",
+              "Kapilvastu",
+              "Kaski",
+              "Kathmandu",
+              "Kavrepalanchok",
+              "Khotang",
+              "Lalitpur",
+              "Lamjung",
+              "Mahottari",
+              "Makwanpur",
+              "Manang",
+              "Morang",
+              "Mugu",
+              "Mustang",
+              "Myagdi",
+              "Nawalparasi",
+              "Nawalpur",
+              "Nuwakot",
+              "Okhaldhunga",
+              "Palpa",
+              "Panchthar",
+              "Parbat",
+              "Parsa",
+              "Pyuthan",
+              "Ramechhap",
+              "Rasuwa",
+              "Rautahat",
+              "Rolpa",
+              "Rukum",
+              "Rukum West",
+              "Rupandehi",
+              "Salyan",
+              "Sankhuwasabha",
+              "Saptari",
+              "Sarlahi",
+              "Sindhuli",
+              "Sindhupalchok",
+              "Siraha",
+              "Solukhumbu",
+              "Sunsari",
+              "Surkhet",
+              "Syangja",
+              "Tanahu",
+              "Taplejung",
+              "Terhathum",
+              "Udayapur"
+            ]
+          },
+          "panIssueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "piiRemarks": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "publishedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "properties": {
+                      "firstname": {
+                        "type": "string"
+                      },
+                      "lastname": {
+                        "type": "string"
+                      },
+                      "username": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string",
+                        "format": "email"
+                      },
+                      "resetPasswordToken": {
+                        "type": "string"
+                      },
+                      "registrationToken": {
+                        "type": "string"
+                      },
+                      "isActive": {
+                        "type": "boolean"
+                      },
+                      "roles": {
+                        "type": "object",
+                        "properties": {
+                          "data": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "attributes": {
+                                  "type": "object",
+                                  "properties": {
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "code": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "users": {
+                                      "type": "object",
+                                      "properties": {
+                                        "data": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "id": {
+                                                "type": "number"
+                                              },
+                                              "attributes": {
+                                                "type": "object",
+                                                "properties": {}
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "permissions": {
+                                      "type": "object",
+                                      "properties": {
+                                        "data": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "id": {
+                                                "type": "number"
+                                              },
+                                              "attributes": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "action": {
+                                                    "type": "string"
+                                                  },
+                                                  "actionParameters": {},
+                                                  "subject": {
+                                                    "type": "string"
+                                                  },
+                                                  "properties": {},
+                                                  "conditions": {},
+                                                  "role": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "data": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "id": {
+                                                            "type": "number"
+                                                          },
+                                                          "attributes": {
+                                                            "type": "object",
+                                                            "properties": {}
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "createdAt": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                  },
+                                                  "updatedAt": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                  },
+                                                  "createdBy": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "data": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "id": {
+                                                            "type": "number"
+                                                          },
+                                                          "attributes": {
+                                                            "type": "object",
+                                                            "properties": {}
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "updatedBy": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "data": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "id": {
+                                                            "type": "number"
+                                                          },
+                                                          "attributes": {
+                                                            "type": "object",
+                                                            "properties": {}
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "createdAt": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "updatedAt": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "createdBy": {
+                                      "type": "object",
+                                      "properties": {
+                                        "data": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "number"
+                                            },
+                                            "attributes": {
+                                              "type": "object",
+                                              "properties": {}
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "updatedBy": {
+                                      "type": "object",
+                                      "properties": {
+                                        "data": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "number"
+                                            },
+                                            "attributes": {
+                                              "type": "object",
+                                              "properties": {}
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "blocked": {
+                        "type": "boolean"
+                      },
+                      "preferedLanguage": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "createdBy": {
+                        "type": "object",
+                        "properties": {
+                          "data": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "attributes": {
+                                "type": "object",
+                                "properties": {}
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "updatedBy": {
+                        "type": "object",
+                        "properties": {
+                          "data": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "attributes": {
+                                "type": "object",
+                                "properties": {}
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "updatedBy": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "PersonalIdentificationInfoResponseDataObject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/PersonalIdentificationInfo"
+          }
+        }
+      },
+      "PersonalIdentificationInfoResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PersonalIdentificationInfoResponseDataObject"
+          },
+          "meta": {
+            "type": "object"
           }
         }
       },
@@ -853,6 +2372,511 @@
     }
   },
   "paths": {
+    "/bank-details": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankDetailListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bank-detail"
+        ],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort by attributes ascending (asc) or descending (desc)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagination[withCount]",
+            "in": "query",
+            "description": "Return page/pageSize (default: true)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "pagination[page]",
+            "in": "query",
+            "description": "Page number (default: 0)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pagination[pageSize]",
+            "in": "query",
+            "description": "Page size (default: 25)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pagination[start]",
+            "in": "query",
+            "description": "Offset value (default: 0)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pagination[limit]",
+            "in": "query",
+            "description": "Number of entities to return (default: 25)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Fields to return (ex: title,author)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "populate",
+            "in": "query",
+            "description": "Relations to return",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "Filters to apply",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "object"
+            },
+            "style": "deepObject"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "description": "Locale to apply",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "get/bank-details"
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankDetailResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bank-detail"
+        ],
+        "parameters": [],
+        "operationId": "post/bank-details",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BankDetailRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bank-details/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankDetailResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bank-detail"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "get/bank-details/{id}"
+      },
+      "put": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankDetailResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bank-detail"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "put/bank-details/{id}",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BankDetailRequest"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bank-detail"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "delete/bank-details/{id}"
+      }
+    },
     "/employees": {
       "get": {
         "responses": {
@@ -1356,6 +3380,511 @@
           }
         ],
         "operationId": "delete/employees/{id}"
+      }
+    },
+    "/personal-identification-infos": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonalIdentificationInfoListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Personal-identification-info"
+        ],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort by attributes ascending (asc) or descending (desc)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagination[withCount]",
+            "in": "query",
+            "description": "Return page/pageSize (default: true)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "pagination[page]",
+            "in": "query",
+            "description": "Page number (default: 0)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pagination[pageSize]",
+            "in": "query",
+            "description": "Page size (default: 25)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pagination[start]",
+            "in": "query",
+            "description": "Offset value (default: 0)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pagination[limit]",
+            "in": "query",
+            "description": "Number of entities to return (default: 25)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Fields to return (ex: title,author)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "populate",
+            "in": "query",
+            "description": "Relations to return",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "Filters to apply",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "object"
+            },
+            "style": "deepObject"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "description": "Locale to apply",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "get/personal-identification-infos"
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonalIdentificationInfoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Personal-identification-info"
+        ],
+        "parameters": [],
+        "operationId": "post/personal-identification-infos",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonalIdentificationInfoRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/personal-identification-infos/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonalIdentificationInfoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Personal-identification-info"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "get/personal-identification-infos/{id}"
+      },
+      "put": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonalIdentificationInfoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Personal-identification-info"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "put/personal-identification-infos/{id}",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonalIdentificationInfoRequest"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Personal-identification-info"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "delete/personal-identification-infos/{id}"
       }
     },
     "/upload": {
