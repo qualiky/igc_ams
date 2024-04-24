@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "address_details",
+  "info": {
+    "singularName": "address-detail",
+    "pluralName": "address-details",
+    "displayName": "AddressDetails",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "addressLabel": {
+      "type": "string",
+      "required": false
+    },
+    "AddressType": {
+      "type": "enumeration",
+      "enum": [
+        "Temporary",
+        "Permanent"
+      ]
+    },
+    "country": {
+      "type": "customField",
+      "required": true,
+      "customField": "plugin::country-select.country"
+    },
+    "addressLineOne": {
+      "type": "string",
+      "required": true
+    },
+    "addressLineTwo": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "province": {
+      "type": "string",
+      "required": true
+    },
+    "temp_employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee",
+      "mappedBy": "temp_address_detail"
+    },
+    "perma_employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee",
+      "mappedBy": "perma_address_detail"
+    }
+  }
+}

@@ -362,353 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiBankDetailBankDetail extends Schema.CollectionType {
-  collectionName: 'bank_details';
-  info: {
-    singularName: 'bank-detail';
-    pluralName: 'bank-details';
-    displayName: 'BankDetails';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    bankAccountNumber: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
-        minLength: 12;
-        maxLength: 16;
-      }>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::bank-detail.bank-detail',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::bank-detail.bank-detail',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiEmployeeEmployee extends Schema.CollectionType {
-  collectionName: 'employees';
-  info: {
-    singularName: 'employee';
-    pluralName: 'employees';
-    displayName: 'Employee';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    employeeIdentifier: Attribute.UID &
-      Attribute.CustomField<'plugin::strapi-advanced-uuid.uuid'>;
-    firstName: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 2;
-        maxLength: 64;
-      }>;
-    middleName: Attribute.String;
-    lastName: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 2;
-        maxLength: 64;
-      }>;
-    userName: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
-        minLength: 3;
-      }>;
-    gender: Attribute.Component<'gender.gender'> & Attribute.Required;
-    dateOfBirth: Attribute.Date & Attribute.Required;
-    bloodGroup: Attribute.Enumeration<
-      [
-        'A-Positive',
-        'A-Negative',
-        'B-Positive',
-        'B-Negative',
-        'AB-Positive',
-        'AB-Negative',
-        'O-Positive',
-        'O-Negative'
-      ]
-    > &
-      Attribute.Required;
-    maritalStatus: Attribute.Enumeration<['Married', 'Unmarried']> &
-      Attribute.Required;
-    nationality: Attribute.String &
-      Attribute.CustomField<'plugin::country-select.country'>;
-    educationStatus: Attribute.Component<
-      'educational-qualification.educational-qualification',
-      true
-    >;
-    panNumber: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
-        minLength: 7;
-      }>;
-    existingMedicalCondition: Attribute.String;
-    personal_identification_info: Attribute.Relation<
-      'api::employee.employee',
-      'oneToOne',
-      'api::personal-identification-info.personal-identification-info'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::employee.employee',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::employee.employee',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiPersonalIdentificationInfoPersonalIdentificationInfo
-  extends Schema.CollectionType {
-  collectionName: 'personal_identification_infos';
-  info: {
-    singularName: 'personal-identification-info';
-    pluralName: 'personal-identification-infos';
-    displayName: 'PersonalIdentificationInfo';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    citizenshipNumber: Attribute.String & Attribute.Required;
-    nationalIdNumber: Attribute.String & Attribute.Unique;
-    citizenshipIssuedProvince: Attribute.Enumeration<
-      [
-        'Koshi (Province 1)',
-        'Madhesh (Province 2)',
-        'Bagmai (Province 3)',
-        'Gandaki (Province 4)',
-        'Lumbini (Province 5)',
-        'Karnali (Province 6)',
-        'Sudurpashchim (Province 7)'
-      ]
-    > &
-      Attribute.Required;
-    citizenshipIssuedDistrict: Attribute.Enumeration<
-      [
-        'Achham',
-        'Arghakhanchi',
-        'Baglung',
-        'Baitadi',
-        'Bajhang',
-        'Bajura',
-        'Banke',
-        'Bara',
-        'Bardiya',
-        'Bhaktapur',
-        'Bhojpur',
-        'Chitwan',
-        'Dadeldhura',
-        'Dailekh',
-        'Dang',
-        'Darchula',
-        'Dhading',
-        'Dhankuta',
-        'Dhanusa',
-        'Dholkha',
-        'Dolpa',
-        'Doti',
-        'Gorkha',
-        'Gulmi',
-        'Humla',
-        'Ilam',
-        'Jajarkot',
-        'Jhapa',
-        'Jumla',
-        'Kailali',
-        'Kalikot',
-        'Kanchanpur',
-        'Kapilvastu',
-        'Kaski',
-        'Kathmandu',
-        'Kavrepalanchok',
-        'Khotang',
-        'Lalitpur',
-        'Lamjung',
-        'Mahottari',
-        'Makwanpur',
-        'Manang',
-        'Morang',
-        'Mugu',
-        'Mustang',
-        'Myagdi',
-        'Nawalparasi',
-        'Nawalpur',
-        'Nuwakot',
-        'Okhaldhunga',
-        'Palpa',
-        'Panchthar',
-        'Parbat',
-        'Parsa',
-        'Pyuthan',
-        'Ramechhap',
-        'Rasuwa',
-        'Rautahat',
-        'Rolpa',
-        'Rukum',
-        'Rukum West',
-        'Rupandehi',
-        'Salyan',
-        'Sankhuwasabha',
-        'Saptari',
-        'Sarlahi',
-        'Sindhuli',
-        'Sindhupalchok',
-        'Siraha',
-        'Solukhumbu',
-        'Sunsari',
-        'Surkhet',
-        'Syangja',
-        'Tanahu',
-        'Taplejung',
-        'Terhathum',
-        'Udayapur'
-      ]
-    > &
-      Attribute.Required;
-    issuedMunicipalRegion: Attribute.String & Attribute.Required;
-    citizenshipIssueDate: Attribute.Date & Attribute.Required;
-    citizenshipIssueProvince: Attribute.Enumeration<
-      [
-        'Koshi (Province 1)',
-        'Madhesh (Province 2)',
-        'Bagmai (Province 3)',
-        'Gandaki (Province 4)',
-        'Lumbini (Province 5)',
-        'Karnali (Province 6)',
-        'Sudurpashchim (Province 7)'
-      ]
-    > &
-      Attribute.Required;
-    passportNumber: Attribute.String;
-    panNumber: Attribute.String & Attribute.Unique;
-    panIssueDistrict: Attribute.Enumeration<
-      [
-        'Achham',
-        'Arghakhanchi',
-        'Baglung',
-        'Baitadi',
-        'Bajhang',
-        'Bajura',
-        'Banke',
-        'Bara',
-        'Bardiya',
-        'Bhaktapur',
-        'Bhojpur',
-        'Chitwan',
-        'Dadeldhura',
-        'Dailekh',
-        'Dang',
-        'Darchula',
-        'Dhading',
-        'Dhankuta',
-        'Dhanusa',
-        'Dholkha',
-        'Dolpa',
-        'Doti',
-        'Gorkha',
-        'Gulmi',
-        'Humla',
-        'Ilam',
-        'Jajarkot',
-        'Jhapa',
-        'Jumla',
-        'Kailali',
-        'Kalikot',
-        'Kanchanpur',
-        'Kapilvastu',
-        'Kaski',
-        'Kathmandu',
-        'Kavrepalanchok',
-        'Khotang',
-        'Lalitpur',
-        'Lamjung',
-        'Mahottari',
-        'Makwanpur',
-        'Manang',
-        'Morang',
-        'Mugu',
-        'Mustang',
-        'Myagdi',
-        'Nawalparasi',
-        'Nawalpur',
-        'Nuwakot',
-        'Okhaldhunga',
-        'Palpa',
-        'Panchthar',
-        'Parbat',
-        'Parsa',
-        'Pyuthan',
-        'Ramechhap',
-        'Rasuwa',
-        'Rautahat',
-        'Rolpa',
-        'Rukum',
-        'Rukum West',
-        'Rupandehi',
-        'Salyan',
-        'Sankhuwasabha',
-        'Saptari',
-        'Sarlahi',
-        'Sindhuli',
-        'Sindhupalchok',
-        'Siraha',
-        'Solukhumbu',
-        'Sunsari',
-        'Surkhet',
-        'Syangja',
-        'Tanahu',
-        'Taplejung',
-        'Terhathum',
-        'Udayapur'
-      ]
-    >;
-    panIssueDate: Attribute.Date;
-    piiRemarks: Attribute.Text;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::personal-identification-info.personal-identification-info',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::personal-identification-info.personal-identification-info',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -1135,6 +788,681 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAddressDetailAddressDetail extends Schema.CollectionType {
+  collectionName: 'address_details';
+  info: {
+    singularName: 'address-detail';
+    pluralName: 'address-details';
+    displayName: 'AddressDetails';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    addressLabel: Attribute.String;
+    AddressType: Attribute.Enumeration<['Temporary', 'Permanent']>;
+    country: Attribute.String &
+      Attribute.Required &
+      Attribute.CustomField<'plugin::country-select.country'>;
+    addressLineOne: Attribute.String & Attribute.Required;
+    addressLineTwo: Attribute.String;
+    city: Attribute.String & Attribute.Required;
+    province: Attribute.String & Attribute.Required;
+    temp_employee: Attribute.Relation<
+      'api::address-detail.address-detail',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    perma_employee: Attribute.Relation<
+      'api::address-detail.address-detail',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::address-detail.address-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::address-detail.address-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiAttendanceInfoAttendanceInfo extends Schema.CollectionType {
+  collectionName: 'attendance_infos';
+  info: {
+    singularName: 'attendance-info';
+    pluralName: 'attendance-infos';
+    displayName: 'AttendanceInfo';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    inTime: Attribute.Time & Attribute.Required;
+    outTime: Attribute.Time;
+    totalHoursWorked: Attribute.Decimal;
+    date: Attribute.Date & Attribute.Required;
+    attendanceStatus: Attribute.Enumeration<
+      ['Present', 'Absent', 'Part Time']
+    > &
+      Attribute.Required;
+    didArriveLate: Attribute.Boolean;
+    didArriveEarly: Attribute.Boolean;
+    didLeaveEarly: Attribute.Boolean;
+    didLeaveLate: Attribute.Boolean;
+    lateArrival: Attribute.Time;
+    earlyDeparture: Attribute.Time;
+    overtimeHours: Attribute.Time;
+    remarks: Attribute.Text;
+    attendingEmployeeId: Attribute.Relation<
+      'api::attendance-info.attendance-info',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::attendance-info.attendance-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::attendance-info.attendance-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBankDetailBankDetail extends Schema.CollectionType {
+  collectionName: 'bank_details';
+  info: {
+    singularName: 'bank-detail';
+    pluralName: 'bank-details';
+    displayName: 'BankDetails';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    bankAccountNumber: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 12;
+        maxLength: 16;
+      }>;
+    bankAccountLabel: Attribute.String & Attribute.Required;
+    bankAccountHolderName: Attribute.String & Attribute.Required;
+    bankName: Attribute.Enumeration<
+      [
+        'Agriculture Development Bank',
+        'Nepal Bank',
+        'Rastriya Banijya Bank',
+        'Citizens Bank International Limited',
+        'Everest Bank',
+        'Global IME Bank Limited',
+        'Himalayan Bank',
+        'Kumari Bank',
+        'Laxmi Sunrise Bank',
+        'Machhapuchhre Bank',
+        'Nabil Bank',
+        'Nepal Investment Mega Bank',
+        'Nepal SBI Bank',
+        'NIC Asia Bank',
+        'NMB Bank',
+        'Prabhu Bank',
+        'Prime Commercial Bank',
+        'Sanima Bank',
+        'Siddhartha Bank',
+        'Standard Chartered Bank'
+      ]
+    >;
+    branchName: Attribute.String & Attribute.Required;
+    employee: Attribute.Relation<
+      'api::bank-detail.bank-detail',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::bank-detail.bank-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::bank-detail.bank-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEmployeeEmployee extends Schema.CollectionType {
+  collectionName: 'employees';
+  info: {
+    singularName: 'employee';
+    pluralName: 'employees';
+    displayName: 'Employee';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    employeeIdentifier: Attribute.UID &
+      Attribute.CustomField<'plugin::strapi-advanced-uuid.uuid'>;
+    firstName: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 2;
+        maxLength: 64;
+      }>;
+    middleName: Attribute.String;
+    lastName: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 2;
+        maxLength: 64;
+      }>;
+    userName: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 3;
+      }>;
+    gender: Attribute.Component<'gender.gender'> & Attribute.Required;
+    dateOfBirth: Attribute.Date & Attribute.Required;
+    bloodGroup: Attribute.Enumeration<
+      [
+        'A-Positive',
+        'A-Negative',
+        'B-Positive',
+        'B-Negative',
+        'AB-Positive',
+        'AB-Negative',
+        'O-Positive',
+        'O-Negative'
+      ]
+    > &
+      Attribute.Required;
+    maritalStatus: Attribute.Enumeration<['Married', 'Unmarried']> &
+      Attribute.Required;
+    nationality: Attribute.String &
+      Attribute.CustomField<'plugin::country-select.country'>;
+    educationStatus: Attribute.Component<
+      'educational-qualification.educational-qualification',
+      true
+    >;
+    panNumber: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 7;
+      }>;
+    existingMedicalCondition: Attribute.String;
+    personal_identification_info: Attribute.Relation<
+      'api::employee.employee',
+      'oneToOne',
+      'api::personal-identification-info.personal-identification-info'
+    >;
+    primary_bank_detail: Attribute.Relation<
+      'api::employee.employee',
+      'oneToOne',
+      'api::bank-detail.bank-detail'
+    >;
+    secondary_bank_detail: Attribute.Relation<
+      'api::employee.employee',
+      'oneToOne',
+      'api::bank-detail.bank-detail'
+    >;
+    primaryEmail: Attribute.Email & Attribute.Required & Attribute.Unique;
+    temp_address_detail: Attribute.Relation<
+      'api::employee.employee',
+      'oneToOne',
+      'api::address-detail.address-detail'
+    >;
+    perma_address_detail: Attribute.Relation<
+      'api::employee.employee',
+      'oneToOne',
+      'api::address-detail.address-detail'
+    >;
+    yearly_leave_details: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::yearly-leave-detail.yearly-leave-detail'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::employee.employee',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::employee.employee',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEmployeeAdminDatumEmployeeAdminDatum
+  extends Schema.CollectionType {
+  collectionName: 'employee_admin_data';
+  info: {
+    singularName: 'employee-admin-datum';
+    pluralName: 'employee-admin-data';
+    displayName: 'EmployeeAdminData';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    employmentStartDate: Attribute.Date & Attribute.Required;
+    payRate: Attribute.Decimal & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::employee-admin-datum.employee-admin-datum',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::employee-admin-datum.employee-admin-datum',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEmploymentStatusEmploymentStatus
+  extends Schema.CollectionType {
+  collectionName: 'employment_statuses';
+  info: {
+    singularName: 'employment-status';
+    pluralName: 'employment-statuses';
+    displayName: 'EmploymentStatus';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    employee: Attribute.Relation<
+      'api::employment-status.employment-status',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    currentlyEmployed: Attribute.Boolean;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::employment-status.employment-status',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::employment-status.employment-status',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLeaveDetailLeaveDetail extends Schema.CollectionType {
+  collectionName: 'leave_details';
+  info: {
+    singularName: 'leave-detail';
+    pluralName: 'leave-details';
+    displayName: 'LeaveDetail';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    leaveType: Attribute.Enumeration<
+      ['Sick Leave', 'Annual Leave', 'Half Day Leave']
+    > &
+      Attribute.Required;
+    leaveDescriptionMessage: Attribute.Text;
+    leaveApplicationForm: Attribute.Media;
+    approvingLineManager: Attribute.Relation<
+      'api::leave-detail.leave-detail',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    applyingEmployee: Attribute.Relation<
+      'api::leave-detail.leave-detail',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    leaveStartDay: Attribute.DateTime & Attribute.Required;
+    leaveEndDay: Attribute.DateTime;
+    approvalStatus: Attribute.Enumeration<
+      ['Decision Pending', 'Approved', 'Rejected']
+    > &
+      Attribute.Required &
+      Attribute.DefaultTo<'Decision Pending'>;
+    messageFromLineManager: Attribute.Text;
+    fiscalYear: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::leave-detail.leave-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::leave-detail.leave-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPersonalIdentificationInfoPersonalIdentificationInfo
+  extends Schema.CollectionType {
+  collectionName: 'personal_identification_infos';
+  info: {
+    singularName: 'personal-identification-info';
+    pluralName: 'personal-identification-infos';
+    displayName: 'PersonalIdentificationInfo';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    citizenshipNumber: Attribute.String & Attribute.Required;
+    nationalIdNumber: Attribute.String & Attribute.Unique;
+    citizenshipIssuedProvince: Attribute.Enumeration<
+      [
+        'Koshi (Province 1)',
+        'Madhesh (Province 2)',
+        'Bagmai (Province 3)',
+        'Gandaki (Province 4)',
+        'Lumbini (Province 5)',
+        'Karnali (Province 6)',
+        'Sudurpashchim (Province 7)'
+      ]
+    > &
+      Attribute.Required;
+    citizenshipIssuedDistrict: Attribute.Enumeration<
+      [
+        'Achham',
+        'Arghakhanchi',
+        'Baglung',
+        'Baitadi',
+        'Bajhang',
+        'Bajura',
+        'Banke',
+        'Bara',
+        'Bardiya',
+        'Bhaktapur',
+        'Bhojpur',
+        'Chitwan',
+        'Dadeldhura',
+        'Dailekh',
+        'Dang',
+        'Darchula',
+        'Dhading',
+        'Dhankuta',
+        'Dhanusa',
+        'Dholkha',
+        'Dolpa',
+        'Doti',
+        'Gorkha',
+        'Gulmi',
+        'Humla',
+        'Ilam',
+        'Jajarkot',
+        'Jhapa',
+        'Jumla',
+        'Kailali',
+        'Kalikot',
+        'Kanchanpur',
+        'Kapilvastu',
+        'Kaski',
+        'Kathmandu',
+        'Kavrepalanchok',
+        'Khotang',
+        'Lalitpur',
+        'Lamjung',
+        'Mahottari',
+        'Makwanpur',
+        'Manang',
+        'Morang',
+        'Mugu',
+        'Mustang',
+        'Myagdi',
+        'Nawalparasi',
+        'Nawalpur',
+        'Nuwakot',
+        'Okhaldhunga',
+        'Palpa',
+        'Panchthar',
+        'Parbat',
+        'Parsa',
+        'Pyuthan',
+        'Ramechhap',
+        'Rasuwa',
+        'Rautahat',
+        'Rolpa',
+        'Rukum',
+        'Rukum West',
+        'Rupandehi',
+        'Salyan',
+        'Sankhuwasabha',
+        'Saptari',
+        'Sarlahi',
+        'Sindhuli',
+        'Sindhupalchok',
+        'Siraha',
+        'Solukhumbu',
+        'Sunsari',
+        'Surkhet',
+        'Syangja',
+        'Tanahu',
+        'Taplejung',
+        'Terhathum',
+        'Udayapur'
+      ]
+    > &
+      Attribute.Required;
+    issuedMunicipalRegion: Attribute.String & Attribute.Required;
+    citizenshipIssueDate: Attribute.Date & Attribute.Required;
+    citizenshipIssueProvince: Attribute.Enumeration<
+      [
+        'Koshi (Province 1)',
+        'Madhesh (Province 2)',
+        'Bagmai (Province 3)',
+        'Gandaki (Province 4)',
+        'Lumbini (Province 5)',
+        'Karnali (Province 6)',
+        'Sudurpashchim (Province 7)'
+      ]
+    > &
+      Attribute.Required;
+    passportNumber: Attribute.String;
+    panNumber: Attribute.String & Attribute.Unique;
+    panIssueDistrict: Attribute.Enumeration<
+      [
+        'Achham',
+        'Arghakhanchi',
+        'Baglung',
+        'Baitadi',
+        'Bajhang',
+        'Bajura',
+        'Banke',
+        'Bara',
+        'Bardiya',
+        'Bhaktapur',
+        'Bhojpur',
+        'Chitwan',
+        'Dadeldhura',
+        'Dailekh',
+        'Dang',
+        'Darchula',
+        'Dhading',
+        'Dhankuta',
+        'Dhanusa',
+        'Dholkha',
+        'Dolpa',
+        'Doti',
+        'Gorkha',
+        'Gulmi',
+        'Humla',
+        'Ilam',
+        'Jajarkot',
+        'Jhapa',
+        'Jumla',
+        'Kailali',
+        'Kalikot',
+        'Kanchanpur',
+        'Kapilvastu',
+        'Kaski',
+        'Kathmandu',
+        'Kavrepalanchok',
+        'Khotang',
+        'Lalitpur',
+        'Lamjung',
+        'Mahottari',
+        'Makwanpur',
+        'Manang',
+        'Morang',
+        'Mugu',
+        'Mustang',
+        'Myagdi',
+        'Nawalparasi',
+        'Nawalpur',
+        'Nuwakot',
+        'Okhaldhunga',
+        'Palpa',
+        'Panchthar',
+        'Parbat',
+        'Parsa',
+        'Pyuthan',
+        'Ramechhap',
+        'Rasuwa',
+        'Rautahat',
+        'Rolpa',
+        'Rukum',
+        'Rukum West',
+        'Rupandehi',
+        'Salyan',
+        'Sankhuwasabha',
+        'Saptari',
+        'Sarlahi',
+        'Sindhuli',
+        'Sindhupalchok',
+        'Siraha',
+        'Solukhumbu',
+        'Sunsari',
+        'Surkhet',
+        'Syangja',
+        'Tanahu',
+        'Taplejung',
+        'Terhathum',
+        'Udayapur'
+      ]
+    >;
+    panIssueDate: Attribute.Date;
+    piiRemarks: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::personal-identification-info.personal-identification-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::personal-identification-info.personal-identification-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiYearlyLeaveDetailYearlyLeaveDetail
+  extends Schema.CollectionType {
+  collectionName: 'yearly_leave_details';
+  info: {
+    singularName: 'yearly-leave-detail';
+    pluralName: 'yearly-leave-details';
+    displayName: 'YearlyLeaveDetails';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    numberOfAnnualLeaves: Attribute.Integer;
+    numberOfSickLeaves: Attribute.Integer;
+    fiscalYear: Attribute.String;
+    employee: Attribute.Relation<
+      'api::yearly-leave-detail.yearly-leave-detail',
+      'manyToOne',
+      'api::employee.employee'
+    >;
+    takenAnnualLeaves: Attribute.Decimal &
+      Attribute.Required &
+      Attribute.DefaultTo<0>;
+    takenSickLeaves: Attribute.Decimal &
+      Attribute.Required &
+      Attribute.DefaultTo<0>;
+    takenHalfDayLeaves: Attribute.Decimal;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::yearly-leave-detail.yearly-leave-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::yearly-leave-detail.yearly-leave-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1145,9 +1473,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::bank-detail.bank-detail': ApiBankDetailBankDetail;
-      'api::employee.employee': ApiEmployeeEmployee;
-      'api::personal-identification-info.personal-identification-info': ApiPersonalIdentificationInfoPersonalIdentificationInfo;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -1156,6 +1481,15 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::address-detail.address-detail': ApiAddressDetailAddressDetail;
+      'api::attendance-info.attendance-info': ApiAttendanceInfoAttendanceInfo;
+      'api::bank-detail.bank-detail': ApiBankDetailBankDetail;
+      'api::employee.employee': ApiEmployeeEmployee;
+      'api::employee-admin-datum.employee-admin-datum': ApiEmployeeAdminDatumEmployeeAdminDatum;
+      'api::employment-status.employment-status': ApiEmploymentStatusEmploymentStatus;
+      'api::leave-detail.leave-detail': ApiLeaveDetailLeaveDetail;
+      'api::personal-identification-info.personal-identification-info': ApiPersonalIdentificationInfoPersonalIdentificationInfo;
+      'api::yearly-leave-detail.yearly-leave-detail': ApiYearlyLeaveDetailYearlyLeaveDetail;
     }
   }
 }

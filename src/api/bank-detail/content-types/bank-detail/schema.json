@@ -4,7 +4,8 @@
   "info": {
     "singularName": "bank-detail",
     "pluralName": "bank-details",
-    "displayName": "BankDetails"
+    "displayName": "BankDetails",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,6 +18,49 @@
       "unique": true,
       "maxLength": 16,
       "minLength": 12
+    },
+    "bankAccountLabel": {
+      "type": "string",
+      "required": true
+    },
+    "bankAccountHolderName": {
+      "type": "string",
+      "required": true
+    },
+    "bankName": {
+      "type": "enumeration",
+      "enum": [
+        "Agriculture Development Bank",
+        "Nepal Bank",
+        "Rastriya Banijya Bank",
+        "Citizens Bank International Limited",
+        "Everest Bank",
+        "Global IME Bank Limited",
+        "Himalayan Bank",
+        "Kumari Bank",
+        "Laxmi Sunrise Bank",
+        "Machhapuchhre Bank",
+        "Nabil Bank",
+        "Nepal Investment Mega Bank",
+        "Nepal SBI Bank",
+        "NIC Asia Bank",
+        "NMB Bank",
+        "Prabhu Bank",
+        "Prime Commercial Bank",
+        "Sanima Bank",
+        "Siddhartha Bank",
+        "Standard Chartered Bank"
+      ]
+    },
+    "branchName": {
+      "type": "string",
+      "required": true
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee",
+      "mappedBy": "secondary_bank_detail"
     }
   }
 }

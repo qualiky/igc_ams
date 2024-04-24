@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employee_admin_data",
+  "info": {
+    "singularName": "employee-admin-datum",
+    "pluralName": "employee-admin-data",
+    "displayName": "EmployeeAdminData"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "employmentStartDate": {
+      "type": "date",
+      "required": true
+    },
+    "payRate": {
+      "type": "decimal",
+      "required": true
+    }
+  }
+}

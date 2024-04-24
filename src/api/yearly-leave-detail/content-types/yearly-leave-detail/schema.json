@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "yearly_leave_details",
+  "info": {
+    "singularName": "yearly-leave-detail",
+    "pluralName": "yearly-leave-details",
+    "displayName": "YearlyLeaveDetails",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "numberOfAnnualLeaves": {
+      "type": "integer",
+      "required": false
+    },
+    "numberOfSickLeaves": {
+      "type": "integer"
+    },
+    "fiscalYear": {
+      "type": "string"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "yearly_leave_details"
+    },
+    "takenAnnualLeaves": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "takenSickLeaves": {
+      "type": "decimal",
+      "default": 0,
+      "required": true
+    },
+    "takenHalfDayLeaves": {
+      "type": "decimal"
+    }
+  }
+}

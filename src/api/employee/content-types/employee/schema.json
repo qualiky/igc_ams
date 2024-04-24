@@ -92,6 +92,41 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::personal-identification-info.personal-identification-info"
+    },
+    "primary_bank_detail": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::bank-detail.bank-detail",
+      "inversedBy": "employee"
+    },
+    "secondary_bank_detail": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::bank-detail.bank-detail",
+      "inversedBy": "employee"
+    },
+    "primaryEmail": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "temp_address_detail": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::address-detail.address-detail",
+      "inversedBy": "temp_employee"
+    },
+    "perma_address_detail": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::address-detail.address-detail",
+      "inversedBy": "perma_employee"
+    },
+    "yearly_leave_details": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::yearly-leave-detail.yearly-leave-detail",
+      "mappedBy": "employee"
     }
   }
 }

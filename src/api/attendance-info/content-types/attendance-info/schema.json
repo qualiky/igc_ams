@@ -1,0 +1,68 @@
+{
+  "kind": "collectionType",
+  "collectionName": "attendance_infos",
+  "info": {
+    "singularName": "attendance-info",
+    "pluralName": "attendance-infos",
+    "displayName": "AttendanceInfo",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "inTime": {
+      "type": "time",
+      "required": true
+    },
+    "outTime": {
+      "type": "time"
+    },
+    "totalHoursWorked": {
+      "type": "decimal"
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "attendanceStatus": {
+      "type": "enumeration",
+      "enum": [
+        "Present",
+        "Absent",
+        "Part Time"
+      ],
+      "required": true
+    },
+    "didArriveLate": {
+      "type": "boolean"
+    },
+    "didArriveEarly": {
+      "type": "boolean"
+    },
+    "didLeaveEarly": {
+      "type": "boolean"
+    },
+    "didLeaveLate": {
+      "type": "boolean"
+    },
+    "lateArrival": {
+      "type": "time"
+    },
+    "earlyDeparture": {
+      "type": "time"
+    },
+    "overtimeHours": {
+      "type": "time"
+    },
+    "remarks": {
+      "type": "text"
+    },
+    "attendingEmployeeId": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    }
+  }
+}

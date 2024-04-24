@@ -1,0 +1,73 @@
+{
+  "kind": "collectionType",
+  "collectionName": "leave_details",
+  "info": {
+    "singularName": "leave-detail",
+    "pluralName": "leave-details",
+    "displayName": "LeaveDetail",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "leaveType": {
+      "type": "enumeration",
+      "enum": [
+        "Sick Leave",
+        "Annual Leave",
+        "Half Day Leave"
+      ],
+      "required": true
+    },
+    "leaveDescriptionMessage": {
+      "type": "text"
+    },
+    "leaveApplicationForm": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "approvingLineManager": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "applyingEmployee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "leaveStartDay": {
+      "type": "datetime",
+      "required": true
+    },
+    "leaveEndDay": {
+      "type": "datetime"
+    },
+    "approvalStatus": {
+      "type": "enumeration",
+      "enum": [
+        "Decision Pending",
+        "Approved",
+        "Rejected"
+      ],
+      "default": "Decision Pending",
+      "required": true
+    },
+    "messageFromLineManager": {
+      "type": "text"
+    },
+    "fiscalYear": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employment_statuses",
+  "info": {
+    "singularName": "employment-status",
+    "pluralName": "employment-statuses",
+    "displayName": "EmploymentStatus"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "currentlyEmployed": {
+      "type": "boolean"
+    }
+  }
+}
