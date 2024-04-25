@@ -2,30 +2,30 @@
   "openapi": "3.0.0",
   "info": {
     "version": "1.0.0",
-    "title": "DOCUMENTATION",
+    "title": "PIRUS DOCUMENTATION",
     "description": "",
-    "termsOfService": "YOUR_TERMS_OF_SERVICE_URL",
     "contact": {
-      "name": "TEAM",
-      "email": "contact-email@something.io",
-      "url": "mywebsite.io"
+      "name": "Sandeep Gautam",
+      "email": "sandeep@infinitydevelopmententerprise.com",
+      "url": "infinitydevelopmententerprise.com"
     },
     "license": {
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-04-24T03:23:55.079Z"
+    "termsOfService": "YOUR_TERMS_OF_SERVICE_URL",
+    "x-generation-date": "2024-04-25T01:33:28.831Z"
   },
   "x-strapi-config": {
-    "path": "/documentation",
     "plugins": [
       "upload",
       "users-permissions"
-    ]
+    ],
+    "path": "/documentation"
   },
   "servers": [
     {
-      "url": "https://admin.pirus.app/api",
+      "url": "http://admin.pirus.app/api",
       "description": "Development server"
     }
   ],

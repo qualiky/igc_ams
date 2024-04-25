@@ -22,7 +22,7 @@ module.exports = {
             plugins: [ 'upload', 'users-permissions'],
             path: '/documentation',
           },
-          servers: [{ url: 'http://admin.pirus.app/api', description: 'Development server' }],
+          servers: [{ url: 'https://admin.pirus.app/api', description: 'Development server' }],
           externalDocs: {
             description: 'Find out more',
             url: 'https://docs.strapi.io/developer-docs/latest/getting-started/introduction.html'
