@@ -1315,6 +1315,36 @@ export interface ApiLeaveDetailLeaveDetail extends Schema.CollectionType {
   };
 }
 
+export interface ApiLunchLunch extends Schema.CollectionType {
+  collectionName: 'lunches';
+  info: {
+    singularName: 'lunch';
+    pluralName: 'lunches';
+    displayName: 'Lunch';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    lunchDate: Attribute.Date;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::lunch.lunch',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::lunch.lunch',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPersonalIdentificationInfoPersonalIdentificationInfo
   extends Schema.CollectionType {
   collectionName: 'personal_identification_infos';
@@ -1617,6 +1647,7 @@ declare module '@strapi/types' {
       'api::employment-position.employment-position': ApiEmploymentPositionEmploymentPosition;
       'api::employment-status.employment-status': ApiEmploymentStatusEmploymentStatus;
       'api::leave-detail.leave-detail': ApiLeaveDetailLeaveDetail;
+      'api::lunch.lunch': ApiLunchLunch;
       'api::personal-identification-info.personal-identification-info': ApiPersonalIdentificationInfoPersonalIdentificationInfo;
       'api::yearly-leave-detail.yearly-leave-detail': ApiYearlyLeaveDetailYearlyLeaveDetail;
     }

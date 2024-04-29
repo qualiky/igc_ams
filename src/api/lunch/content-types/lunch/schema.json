@@ -13,12 +13,6 @@
   "attributes": {
     "lunchDate": {
       "type": "date"
-    },
-    "employee": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::employee.employee",
-      "inversedBy": "lunches"
     }
   }
 }
