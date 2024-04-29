@@ -31,7 +31,7 @@
     "takenAnnualLeaves": {
       "type": "decimal",
       "required": true,
-      "default": 0
+      "default": 1
     },
     "takenSickLeaves": {
       "type": "decimal",

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "personal-identification-info",
     "pluralName": "personal-identification-infos",
-    "displayName": "PersonalIdentificationInfo"
+    "displayName": "PersonalIdentificationInfo",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -231,6 +232,22 @@
     },
     "piiRemarks": {
       "type": "text"
+    },
+    "citizenshipScanCopy": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "panScanCopy": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }

@@ -957,6 +957,36 @@ export interface ApiBankDetailBankDetail extends Schema.CollectionType {
   };
 }
 
+export interface ApiCompanyCompany extends Schema.CollectionType {
+  collectionName: 'companies';
+  info: {
+    singularName: 'company';
+    pluralName: 'companies';
+    displayName: 'Company';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    companyName: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::company.company',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::company.company',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiEmployeeEmployee extends Schema.CollectionType {
   collectionName: 'employees';
   info: {
@@ -1101,6 +1131,93 @@ export interface ApiEmployeeAdminDatumEmployeeAdminDatum
   };
 }
 
+export interface ApiEmployeePastPositionEmployeePastPosition
+  extends Schema.CollectionType {
+  collectionName: 'employee_past_positions';
+  info: {
+    singularName: 'employee-past-position';
+    pluralName: 'employee-past-positions';
+    displayName: 'EmployeePastPositions';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    employee: Attribute.Relation<
+      'api::employee-past-position.employee-past-position',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    lineManager: Attribute.Relation<
+      'api::employee-past-position.employee-past-position',
+      'oneToOne',
+      'api::address-detail.address-detail'
+    >;
+    employmentPosition: Attribute.Relation<
+      'api::employee-past-position.employee-past-position',
+      'oneToOne',
+      'api::employment-position.employment-position'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::employee-past-position.employee-past-position',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::employee-past-position.employee-past-position',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEmploymentPositionEmploymentPosition
+  extends Schema.CollectionType {
+  collectionName: 'employment_positions';
+  info: {
+    singularName: 'employment-position';
+    pluralName: 'employment-positions';
+    displayName: 'EmploymentPosition';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    positionTitle: Attribute.String & Attribute.Required;
+    positionStartDate: Attribute.Date & Attribute.Required;
+    positionEndDate: Attribute.Date;
+    positionDescription: Attribute.RichText & Attribute.Required;
+    company: Attribute.Relation<
+      'api::employment-position.employment-position',
+      'oneToOne',
+      'api::company.company'
+    >;
+    signedContract: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::employment-position.employment-position',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::employment-position.employment-position',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiEmploymentStatusEmploymentStatus
   extends Schema.CollectionType {
   collectionName: 'employment_statuses';
@@ -1108,6 +1225,7 @@ export interface ApiEmploymentStatusEmploymentStatus
     singularName: 'employment-status';
     pluralName: 'employment-statuses';
     displayName: 'EmploymentStatus';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1119,6 +1237,11 @@ export interface ApiEmploymentStatusEmploymentStatus
       'api::employee.employee'
     >;
     currentlyEmployed: Attribute.Boolean;
+    employeePastPositions: Attribute.Relation<
+      'api::employment-status.employment-status',
+      'oneToMany',
+      'api::employee-past-position.employee-past-position'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1199,6 +1322,7 @@ export interface ApiPersonalIdentificationInfoPersonalIdentificationInfo
     singularName: 'personal-identification-info';
     pluralName: 'personal-identification-infos';
     displayName: 'PersonalIdentificationInfo';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1399,6 +1523,8 @@ export interface ApiPersonalIdentificationInfoPersonalIdentificationInfo
     >;
     panIssueDate: Attribute.Date;
     piiRemarks: Attribute.Text;
+    citizenshipScanCopy: Attribute.Media;
+    panScanCopy: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1440,7 +1566,7 @@ export interface ApiYearlyLeaveDetailYearlyLeaveDetail
     >;
     takenAnnualLeaves: Attribute.Decimal &
       Attribute.Required &
-      Attribute.DefaultTo<0>;
+      Attribute.DefaultTo<1>;
     takenSickLeaves: Attribute.Decimal &
       Attribute.Required &
       Attribute.DefaultTo<0>;
@@ -1484,8 +1610,11 @@ declare module '@strapi/types' {
       'api::address-detail.address-detail': ApiAddressDetailAddressDetail;
       'api::attendance-info.attendance-info': ApiAttendanceInfoAttendanceInfo;
       'api::bank-detail.bank-detail': ApiBankDetailBankDetail;
+      'api::company.company': ApiCompanyCompany;
       'api::employee.employee': ApiEmployeeEmployee;
       'api::employee-admin-datum.employee-admin-datum': ApiEmployeeAdminDatumEmployeeAdminDatum;
+      'api::employee-past-position.employee-past-position': ApiEmployeePastPositionEmployeePastPosition;
+      'api::employment-position.employment-position': ApiEmploymentPositionEmploymentPosition;
       'api::employment-status.employment-status': ApiEmploymentStatusEmploymentStatus;
       'api::leave-detail.leave-detail': ApiLeaveDetailLeaveDetail;
       'api::personal-identification-info.personal-identification-info': ApiPersonalIdentificationInfoPersonalIdentificationInfo;

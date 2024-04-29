@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employment_positions",
+  "info": {
+    "singularName": "employment-position",
+    "pluralName": "employment-positions",
+    "displayName": "EmploymentPosition",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "positionTitle": {
+      "type": "string",
+      "required": true
+    },
+    "positionStartDate": {
+      "type": "date",
+      "required": true
+    },
+    "positionEndDate": {
+      "type": "date"
+    },
+    "positionDescription": {
+      "type": "richtext",
+      "required": true
+    },
+    "company": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::company.company"
+    },
+    "signedContract": {
+      "allowedTypes": [
+        "files"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

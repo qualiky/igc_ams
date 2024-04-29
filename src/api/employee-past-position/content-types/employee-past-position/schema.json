@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employee_past_positions",
+  "info": {
+    "singularName": "employee-past-position",
+    "pluralName": "employee-past-positions",
+    "displayName": "EmployeePastPositions",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "lineManager": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::address-detail.address-detail"
+    },
+    "employmentPosition": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employment-position.employment-position"
+    }
+  }
+}

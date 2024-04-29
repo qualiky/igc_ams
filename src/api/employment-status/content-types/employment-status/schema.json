@@ -4,7 +4,8 @@
   "info": {
     "singularName": "employment-status",
     "pluralName": "employment-statuses",
-    "displayName": "EmploymentStatus"
+    "displayName": "EmploymentStatus",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,6 +19,11 @@
     },
     "currentlyEmployed": {
       "type": "boolean"
+    },
+    "employeePastPositions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::employee-past-position.employee-past-position"
     }
   }
 }
