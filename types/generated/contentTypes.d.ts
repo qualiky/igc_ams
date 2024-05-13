@@ -934,6 +934,12 @@ export interface ApiBankDetailBankDetail extends Schema.CollectionType {
       ]
     >;
     branchName: Attribute.String & Attribute.Required;
+    bankAccountType: Attribute.Enumeration<['Primary', 'Secondary']>;
+    employee: Attribute.Relation<
+      'api::bank-detail.bank-detail',
+      'manyToOne',
+      'api::employee.employee'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1063,16 +1069,6 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
     gender: Attribute.Enumeration<
       ['Male', 'Female', 'Other', 'Prefer Not To Say']
     >;
-    primaryBankDetail: Attribute.Relation<
-      'api::employee.employee',
-      'oneToOne',
-      'api::bank-detail.bank-detail'
-    >;
-    secondaryBankDetail: Attribute.Relation<
-      'api::employee.employee',
-      'oneToOne',
-      'api::bank-detail.bank-detail'
-    >;
     performanceAppraisals: Attribute.Relation<
       'api::employee.employee',
       'oneToMany',
@@ -1082,6 +1078,11 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       'api::employee.employee',
       'oneToMany',
       'api::employee-lunch-detail.employee-lunch-detail'
+    >;
+    bankDetails: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::bank-detail.bank-detail'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

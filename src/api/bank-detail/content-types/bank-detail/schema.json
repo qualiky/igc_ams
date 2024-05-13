@@ -55,6 +55,19 @@
     "branchName": {
       "type": "string",
       "required": true
+    },
+    "bankAccountType": {
+      "type": "enumeration",
+      "enum": [
+        "Primary",
+        "Secondary"
+      ]
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "bankDetails"
     }
   }
 }

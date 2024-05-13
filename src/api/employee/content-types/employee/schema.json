@@ -121,16 +121,6 @@
         "Prefer Not To Say"
       ]
     },
-    "primaryBankDetail": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::bank-detail.bank-detail"
-    },
-    "secondaryBankDetail": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::bank-detail.bank-detail"
-    },
     "performanceAppraisals": {
       "type": "relation",
       "relation": "oneToMany",
@@ -141,6 +131,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::employee-lunch-detail.employee-lunch-detail",
+      "mappedBy": "employee"
+    },
+    "bankDetails": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::bank-detail.bank-detail",
       "mappedBy": "employee"
     }
   }
