@@ -81,12 +81,6 @@
       "relation": "oneToOne",
       "target": "api::personal-identification-info.personal-identification-info"
     },
-    "primary_bank_detail": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::bank-detail.bank-detail",
-      "inversedBy": "employee"
-    },
     "primaryEmail": {
       "type": "email",
       "required": true,

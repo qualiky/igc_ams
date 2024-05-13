@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employee_lunch_details",
+  "info": {
+    "singularName": "employee-lunch-detail",
+    "pluralName": "employee-lunch-details",
+    "displayName": "EmployeeLunchDetails",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "employee": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "employeeLunchDetails"
+    },
+    "pendingAmount": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "startDate": {
+      "type": "date",
+      "required": true
+    },
+    "endDate": {
+      "type": "date",
+      "required": true
+    },
+    "lunchPeriodName": {
+      "type": "string"
+    },
+    "lunches": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::lunch.lunch",
+      "mappedBy": "employeeLunchDetail"
+    }
+  }
+}
