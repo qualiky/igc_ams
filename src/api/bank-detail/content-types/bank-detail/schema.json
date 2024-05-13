@@ -55,12 +55,6 @@
     "branchName": {
       "type": "string",
       "required": true
-    },
-    "employee": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::employee.employee",
-      "mappedBy": "secondary_bank_detail"
     }
   }
 }

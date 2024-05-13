@@ -742,7 +742,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -771,6 +770,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    profileImage: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1020,7 +1020,6 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       Attribute.SetMinMaxLength<{
         minLength: 3;
       }>;
-    gender: Attribute.Component<'gender.gender'> & Attribute.Required;
     dateOfBirth: Attribute.Date & Attribute.Required;
     bloodGroup: Attribute.Enumeration<
       [
@@ -1043,12 +1042,6 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       'educational-qualification.educational-qualification',
       true
     >;
-    panNumber: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
-        minLength: 7;
-      }>;
     existingMedicalCondition: Attribute.String;
     personal_identification_info: Attribute.Relation<
       'api::employee.employee',
@@ -1080,6 +1073,10 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       'api::employee.employee',
       'oneToMany',
       'api::yearly-leave-detail.yearly-leave-detail'
+    >;
+    profileImage: Attribute.Media;
+    gender: Attribute.Enumeration<
+      ['Male', 'Female', 'Other', 'Prefer Not To Say']
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
