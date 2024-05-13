@@ -934,11 +934,6 @@ export interface ApiBankDetailBankDetail extends Schema.CollectionType {
       ]
     >;
     branchName: Attribute.String & Attribute.Required;
-    employee: Attribute.Relation<
-      'api::bank-detail.bank-detail',
-      'oneToOne',
-      'api::employee.employee'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1048,16 +1043,6 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       'oneToOne',
       'api::personal-identification-info.personal-identification-info'
     >;
-    primary_bank_detail: Attribute.Relation<
-      'api::employee.employee',
-      'oneToOne',
-      'api::bank-detail.bank-detail'
-    >;
-    secondary_bank_detail: Attribute.Relation<
-      'api::employee.employee',
-      'oneToOne',
-      'api::bank-detail.bank-detail'
-    >;
     primaryEmail: Attribute.Email & Attribute.Required & Attribute.Unique;
     temp_address_detail: Attribute.Relation<
       'api::employee.employee',
@@ -1077,6 +1062,26 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
     profileImage: Attribute.Media;
     gender: Attribute.Enumeration<
       ['Male', 'Female', 'Other', 'Prefer Not To Say']
+    >;
+    primaryBankDetail: Attribute.Relation<
+      'api::employee.employee',
+      'oneToOne',
+      'api::bank-detail.bank-detail'
+    >;
+    secondaryBankDetail: Attribute.Relation<
+      'api::employee.employee',
+      'oneToOne',
+      'api::bank-detail.bank-detail'
+    >;
+    performanceAppraisals: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::performance-appraisal.performance-appraisal'
+    >;
+    employeeLunchDetails: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::employee-lunch-detail.employee-lunch-detail'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1121,6 +1126,53 @@ export interface ApiEmployeeAdminDatumEmployeeAdminDatum
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::employee-admin-datum.employee-admin-datum',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEmployeeLunchDetailEmployeeLunchDetail
+  extends Schema.CollectionType {
+  collectionName: 'employee_lunch_details';
+  info: {
+    singularName: 'employee-lunch-detail';
+    pluralName: 'employee-lunch-details';
+    displayName: 'EmployeeLunchDetails';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    pendingAmount: Attribute.Decimal &
+      Attribute.Required &
+      Attribute.DefaultTo<0>;
+    startDate: Attribute.Date & Attribute.Required;
+    endDate: Attribute.Date & Attribute.Required;
+    lunchPeriodName: Attribute.String;
+    lunches: Attribute.Relation<
+      'api::employee-lunch-detail.employee-lunch-detail',
+      'oneToMany',
+      'api::lunch.lunch'
+    >;
+    employee: Attribute.Relation<
+      'api::employee-lunch-detail.employee-lunch-detail',
+      'manyToOne',
+      'api::employee.employee'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::employee-lunch-detail.employee-lunch-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::employee-lunch-detail.employee-lunch-detail',
       'oneToOne',
       'admin::user'
     > &
@@ -1318,12 +1370,20 @@ export interface ApiLunchLunch extends Schema.CollectionType {
     singularName: 'lunch';
     pluralName: 'lunches';
     displayName: 'Lunch';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     lunchDate: Attribute.Date;
+    employeeLunchDetail: Attribute.Relation<
+      'api::lunch.lunch',
+      'manyToOne',
+      'api::employee-lunch-detail.employee-lunch-detail'
+    >;
+    lunch: Attribute.Text;
+    hadLunch: Attribute.Boolean;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1335,6 +1395,67 @@ export interface ApiLunchLunch extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::lunch.lunch',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPerformanceAppraisalPerformanceAppraisal
+  extends Schema.CollectionType {
+  collectionName: 'performance_appraisals';
+  info: {
+    singularName: 'performance-appraisal';
+    pluralName: 'performance-appraisals';
+    displayName: 'PerformanceAppraisal';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    performanceAppraisalDate: Attribute.Date & Attribute.Required;
+    performanceAppraisalDetails: Attribute.RichText & Attribute.Required;
+    performanceAppraisalSheet: Attribute.Media;
+    lineManagerFeedback: Attribute.RichText;
+    hrFeedback: Attribute.RichText;
+    hrRep: Attribute.Relation<
+      'api::performance-appraisal.performance-appraisal',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    appraisalType: Attribute.Enumeration<
+      [
+        'Annual Appraisal',
+        'Quarterly Appraisal',
+        'Record of Conversation',
+        'Exit Interview'
+      ]
+    > &
+      Attribute.Required &
+      Attribute.DefaultTo<'Quarterly Appraisal'>;
+    employee: Attribute.Relation<
+      'api::performance-appraisal.performance-appraisal',
+      'manyToOne',
+      'api::employee.employee'
+    >;
+    lineManager: Attribute.Relation<
+      'api::performance-appraisal.performance-appraisal',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::performance-appraisal.performance-appraisal',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::performance-appraisal.performance-appraisal',
       'oneToOne',
       'admin::user'
     > &
@@ -1640,11 +1761,13 @@ declare module '@strapi/types' {
       'api::company.company': ApiCompanyCompany;
       'api::employee.employee': ApiEmployeeEmployee;
       'api::employee-admin-datum.employee-admin-datum': ApiEmployeeAdminDatumEmployeeAdminDatum;
+      'api::employee-lunch-detail.employee-lunch-detail': ApiEmployeeLunchDetailEmployeeLunchDetail;
       'api::employee-past-position.employee-past-position': ApiEmployeePastPositionEmployeePastPosition;
       'api::employment-position.employment-position': ApiEmploymentPositionEmploymentPosition;
       'api::employment-status.employment-status': ApiEmploymentStatusEmploymentStatus;
       'api::leave-detail.leave-detail': ApiLeaveDetailLeaveDetail;
       'api::lunch.lunch': ApiLunchLunch;
+      'api::performance-appraisal.performance-appraisal': ApiPerformanceAppraisalPerformanceAppraisal;
       'api::personal-identification-info.personal-identification-info': ApiPersonalIdentificationInfoPersonalIdentificationInfo;
       'api::yearly-leave-detail.yearly-leave-detail': ApiYearlyLeaveDetailYearlyLeaveDetail;
     }

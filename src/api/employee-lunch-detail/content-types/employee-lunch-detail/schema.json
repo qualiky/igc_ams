@@ -12,12 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "employee": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::employee.employee",
-      "inversedBy": "employeeLunchDetails"
-    },
     "pendingAmount": {
       "type": "decimal",
       "required": true,
@@ -39,6 +33,12 @@
       "relation": "oneToMany",
       "target": "api::lunch.lunch",
       "mappedBy": "employeeLunchDetail"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "employeeLunchDetails"
     }
   }
 }
