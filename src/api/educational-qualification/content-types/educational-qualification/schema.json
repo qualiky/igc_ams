@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "educational_qualifications",
+  "info": {
+    "singularName": "educational-qualification",
+    "pluralName": "educational-qualifications",
+    "displayName": "Educational-Qualification",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "programName": {
+      "type": "string",
+      "required": true
+    },
+    "facultyName": {
+      "type": "string"
+    },
+    "level": {
+      "type": "enumeration",
+      "enum": [
+        "Plus Two or Equivalent",
+        "Bachelors",
+        "Masters",
+        "MPhil",
+        "PhD"
+      ]
+    },
+    "schoolUniName": {
+      "type": "string"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "educationalQualifications"
+    },
+    "startYear": {
+      "type": "date"
+    },
+    "endYear": {
+      "type": "date"
+    }
+  }
+}

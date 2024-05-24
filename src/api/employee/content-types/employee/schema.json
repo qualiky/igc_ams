@@ -67,11 +67,6 @@
       "type": "customField",
       "customField": "plugin::country-select.country"
     },
-    "educationStatus": {
-      "type": "component",
-      "repeatable": true,
-      "component": "educational-qualification.educational-qualification"
-    },
     "existingMedicalCondition": {
       "type": "string",
       "required": false
@@ -137,6 +132,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::bank-detail.bank-detail",
+      "mappedBy": "employee"
+    },
+    "educationalQualifications": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::educational-qualification.educational-qualification",
       "mappedBy": "employee"
     }
   }

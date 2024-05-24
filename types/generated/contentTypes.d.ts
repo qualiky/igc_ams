@@ -988,6 +988,50 @@ export interface ApiCompanyCompany extends Schema.CollectionType {
   };
 }
 
+export interface ApiEducationalQualificationEducationalQualification
+  extends Schema.CollectionType {
+  collectionName: 'educational_qualifications';
+  info: {
+    singularName: 'educational-qualification';
+    pluralName: 'educational-qualifications';
+    displayName: 'Educational-Qualification';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    programName: Attribute.String & Attribute.Required;
+    facultyName: Attribute.String;
+    level: Attribute.Enumeration<
+      ['Plus Two or Equivalent', 'Bachelors', 'Masters', 'MPhil', 'PhD']
+    >;
+    schoolUniName: Attribute.String;
+    employee: Attribute.Relation<
+      'api::educational-qualification.educational-qualification',
+      'manyToOne',
+      'api::employee.employee'
+    >;
+    startYear: Attribute.Date;
+    endYear: Attribute.Date;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::educational-qualification.educational-qualification',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::educational-qualification.educational-qualification',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiEmployeeEmployee extends Schema.CollectionType {
   collectionName: 'employees';
   info: {
@@ -1039,10 +1083,6 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       Attribute.Required;
     nationality: Attribute.String &
       Attribute.CustomField<'plugin::country-select.country'>;
-    educationStatus: Attribute.Component<
-      'educational-qualification.educational-qualification',
-      true
-    >;
     existingMedicalCondition: Attribute.String;
     personal_identification_info: Attribute.Relation<
       'api::employee.employee',
@@ -1083,6 +1123,11 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       'api::employee.employee',
       'oneToMany',
       'api::bank-detail.bank-detail'
+    >;
+    educationalQualifications: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::educational-qualification.educational-qualification'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1760,6 +1805,7 @@ declare module '@strapi/types' {
       'api::attendance-info.attendance-info': ApiAttendanceInfoAttendanceInfo;
       'api::bank-detail.bank-detail': ApiBankDetailBankDetail;
       'api::company.company': ApiCompanyCompany;
+      'api::educational-qualification.educational-qualification': ApiEducationalQualificationEducationalQualification;
       'api::employee.employee': ApiEmployeeEmployee;
       'api::employee-admin-datum.employee-admin-datum': ApiEmployeeAdminDatumEmployeeAdminDatum;
       'api::employee-lunch-detail.employee-lunch-detail': ApiEmployeeLunchDetailEmployeeLunchDetail;
