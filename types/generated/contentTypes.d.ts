@@ -1000,6 +1000,39 @@ export interface ApiBankDetailBankDetail extends Schema.CollectionType {
   };
 }
 
+export interface ApiClientClient extends Schema.CollectionType {
+  collectionName: 'clients';
+  info: {
+    singularName: 'client';
+    pluralName: 'clients';
+    displayName: 'client';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    clientName: Attribute.String;
+    clientContactNumber: Attribute.String;
+    clientEmail: Attribute.Email;
+    clientAddress: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::client.client',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::client.client',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiCompanyCompany extends Schema.CollectionType {
   collectionName: 'companies';
   info: {
@@ -1994,6 +2027,7 @@ declare module '@strapi/types' {
       'api::address-detail.address-detail': ApiAddressDetailAddressDetail;
       'api::attendance-info.attendance-info': ApiAttendanceInfoAttendanceInfo;
       'api::bank-detail.bank-detail': ApiBankDetailBankDetail;
+      'api::client.client': ApiClientClient;
       'api::company.company': ApiCompanyCompany;
       'api::educational-qualification.educational-qualification': ApiEducationalQualificationEducationalQualification;
       'api::employee.employee': ApiEmployeeEmployee;
