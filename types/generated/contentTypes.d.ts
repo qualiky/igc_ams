@@ -1573,7 +1573,7 @@ export interface ApiLeaveDetailLeaveDetail extends Schema.CollectionType {
       Attribute.Required &
       Attribute.DefaultTo<'Decision Pending'>;
     messageFromLineManager: Attribute.Text;
-    fiscalYear: Attribute.String & Attribute.Required;
+    fiscalYear: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
