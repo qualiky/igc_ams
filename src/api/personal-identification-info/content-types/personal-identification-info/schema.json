@@ -233,21 +233,41 @@
     "piiRemarks": {
       "type": "text"
     },
-    "citizenshipScanCopy": {
-      "allowedTypes": [
-        "images",
-        "files"
-      ],
+    "citizenshipScanCopyFront": {
       "type": "media",
-      "multiple": true
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     },
-    "panScanCopy": {
+    "panScanCopyFront": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
-        "images",
-        "files"
+        "images"
+      ]
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee",
+      "mappedBy": "personalIdentificationInfo"
+    },
+    "citizenshipScanCopyBack": {
+      "allowedTypes": [
+        "images"
       ],
       "type": "media",
-      "multiple": true
+      "multiple": false
+    },
+    "panScanCopyBack": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

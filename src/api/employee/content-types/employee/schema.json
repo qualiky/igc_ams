@@ -71,10 +71,11 @@
       "type": "string",
       "required": false
     },
-    "personal_identification_info": {
+    "personalIdentificationInfo": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::personal-identification-info.personal-identification-info"
+      "target": "api::personal-identification-info.personal-identification-info",
+      "inversedBy": "employee"
     },
     "primaryEmail": {
       "type": "email",
@@ -139,6 +140,12 @@
       "relation": "oneToMany",
       "target": "api::educational-qualification.educational-qualification",
       "mappedBy": "employee"
+    },
+    "attendanceInfos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attendance-info.attendance-info",
+      "mappedBy": "attendingEmployeeId"
     }
   }
 }

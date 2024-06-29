@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_lead_logs_leads",
+  "info": {
+    "displayName": "Lead",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "activityDescription": {
+      "type": "string"
+    },
+    "assignedEmployee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "activityDateTime": {
+      "type": "datetime"
+    }
+  }
+}

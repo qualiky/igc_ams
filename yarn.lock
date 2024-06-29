@@ -1726,7 +1726,7 @@
     "@strapi/utils" "4.23.1"
     fs-extra "10.0.0"
 
-"@strapi/strapi@^4.0.0", "@strapi/strapi@^4.14.5", "@strapi/strapi@^4.15.1", "@strapi/strapi@^4.3.4", "@strapi/strapi@^4.4.0", "@strapi/strapi@4.23.1":
+"@strapi/strapi@^4.0.0", "@strapi/strapi@^4.14.5", "@strapi/strapi@^4.15.1", "@strapi/strapi@^4.3.4", "@strapi/strapi@^4.4.0", "@strapi/strapi@4.23.1", "@strapi/strapi@4.x.x":
   version "4.23.1"
   resolved "https://registry.npmjs.org/@strapi/strapi/-/strapi-4.23.1.tgz"
   integrity sha512-XjiUCMUXkVB23DTntU/qdu3i1xd1THmOcD+KtE7qjDhzdj06lAsK5eOFVS8pU+j5LKoYXs2Q2vwGqerXuYPylA==
@@ -8974,6 +8974,11 @@ strapi-plugin-country-select@^1.0.3:
   integrity sha512-Pim8zf4cz59p9gKMLZr1KPiXExLjnyfd4m3D4x9B9iV+GHpErPIbwcDuk+5qLHOyIezjv+WJj6LolzQhsu9JNg==
   dependencies:
     i18n-iso-countries "^7.5.0"
+
+strapi-plugin-custom-api@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/strapi-plugin-custom-api/-/strapi-plugin-custom-api-1.0.5.tgz"
+  integrity sha512-Tk+ZUcJ9Hdr8gq30t6mAj9yZoRWwQu2EzP9MgYkHFiyjE4yyCUMajqgYcrjbJXd0sK1W46JZ104kMSm6R88wMg==
 
 strapi-plugin-populate-deep@^3.0.1:
   version "3.0.1"

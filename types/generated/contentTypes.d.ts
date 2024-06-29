@@ -788,6 +788,48 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface PluginCustomApiCustomApi extends Schema.CollectionType {
+  collectionName: 'custom_apis';
+  info: {
+    singularName: 'custom-api';
+    pluralName: 'custom-apis';
+    displayName: 'Custom API';
+  };
+  options: {
+    draftAndPublish: false;
+    comment: '';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: true;
+    };
+    'content-type-builder': {
+      visible: true;
+    };
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'plugin::custom-api.custom-api', 'name'> &
+      Attribute.Required;
+    selectedContentType: Attribute.JSON;
+    structure: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::custom-api.custom-api',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::custom-api.custom-api',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiAddressDetailAddressDetail extends Schema.CollectionType {
   collectionName: 'address_details';
   info: {
@@ -849,7 +891,7 @@ export interface ApiAttendanceInfoAttendanceInfo extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    inTime: Attribute.Time & Attribute.Required;
+    inTime: Attribute.Time;
     outTime: Attribute.Time;
     totalHoursWorked: Attribute.Decimal;
     date: Attribute.Date & Attribute.Required;
@@ -867,7 +909,7 @@ export interface ApiAttendanceInfoAttendanceInfo extends Schema.CollectionType {
     remarks: Attribute.Text;
     attendingEmployeeId: Attribute.Relation<
       'api::attendance-info.attendance-info',
-      'oneToOne',
+      'manyToOne',
       'api::employee.employee'
     >;
     createdAt: Attribute.DateTime;
@@ -1084,7 +1126,7 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
     nationality: Attribute.String &
       Attribute.CustomField<'plugin::country-select.country'>;
     existingMedicalCondition: Attribute.String;
-    personal_identification_info: Attribute.Relation<
+    personalIdentificationInfo: Attribute.Relation<
       'api::employee.employee',
       'oneToOne',
       'api::personal-identification-info.personal-identification-info'
@@ -1128,6 +1170,11 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       'api::employee.employee',
       'oneToMany',
       'api::educational-qualification.educational-qualification'
+    >;
+    attendanceInfos: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::attendance-info.attendance-info'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1348,6 +1395,141 @@ export interface ApiEmploymentStatusEmploymentStatus
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::employment-status.employment-status',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLeadCompanyLeadCompany extends Schema.CollectionType {
+  collectionName: 'lead_companies';
+  info: {
+    singularName: 'lead-company';
+    pluralName: 'lead-companies';
+    displayName: 'LeadCompany';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    leadCompanyName: Attribute.String;
+    leadApproachPlatform: Attribute.Enumeration<
+      [
+        'Facebook',
+        'Messenger',
+        'Instagram',
+        'LinkedIn',
+        'WhatsApp',
+        'Google Maps',
+        'Website',
+        'Team Member',
+        'Company Number',
+        'Company Email',
+        'Other Platform'
+      ]
+    >;
+    leadApproachPlatformOther: Attribute.String;
+    leadApproachSource: Attribute.Enumeration<
+      ['Ads', 'Client Reference', 'SM Post', 'Offline Platform', 'Other']
+    >;
+    leadApproachedEmployee: Attribute.Relation<
+      'api::lead-company.lead-company',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    leadContactPersonName: Attribute.String;
+    leadContactPhoneNumber: Attribute.String;
+    leadContactEmail: Attribute.Email;
+    remarks: Attribute.Blocks;
+    leadOfferings: Attribute.Blocks;
+    leadStatus: Attribute.Enumeration<
+      [
+        'Lead Contacted Team',
+        'Team Contacted Lead',
+        'Phone Conversation',
+        'First Meeting',
+        'Quote Sent',
+        'Client Interested',
+        'Verbal Confirmation',
+        'Final Meeting',
+        'Contract Signing',
+        'Advance Pending',
+        'Advance Received',
+        'Client Rejected by Agency',
+        'Agency Rejected by Client'
+      ]
+    >;
+    approachDate: Attribute.Date;
+    sentQuotesAndDocuments: Attribute.Media;
+    nextStep: Attribute.Enumeration<
+      [
+        'Make a Call with the Lead',
+        'Send Quote',
+        'Go For a Meeting',
+        'Send Client Location For Meeting',
+        'Follow up on sent Quote',
+        'Send Contract',
+        'Assign Account'
+      ]
+    >;
+    leadStage: Attribute.Relation<
+      'api::lead-company.lead-company',
+      'manyToOne',
+      'api::lead-stage.lead-stage'
+    >;
+    leadLogs: Attribute.Component<'lead-logs.lead', true>;
+    priority: Attribute.Enumeration<
+      ['Low', 'Medium', 'High', 'Critical', 'None']
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::lead-company.lead-company',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::lead-company.lead-company',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLeadStageLeadStage extends Schema.CollectionType {
+  collectionName: 'lead_stages';
+  info: {
+    singularName: 'lead-stage';
+    pluralName: 'lead-stages';
+    displayName: 'Lead Stage';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    leadStageName: Attribute.String;
+    leadCompanies: Attribute.Relation<
+      'api::lead-stage.lead-stage',
+      'oneToMany',
+      'api::lead-company.lead-company'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::lead-stage.lead-stage',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::lead-stage.lead-stage',
       'oneToOne',
       'admin::user'
     > &
@@ -1717,8 +1899,15 @@ export interface ApiPersonalIdentificationInfoPersonalIdentificationInfo
     >;
     panIssueDate: Attribute.Date;
     piiRemarks: Attribute.Text;
-    citizenshipScanCopy: Attribute.Media;
-    panScanCopy: Attribute.Media;
+    citizenshipScanCopyFront: Attribute.Media;
+    panScanCopyFront: Attribute.Media;
+    employee: Attribute.Relation<
+      'api::personal-identification-info.personal-identification-info',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    citizenshipScanCopyBack: Attribute.Media;
+    panScanCopyBack: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1801,6 +1990,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'plugin::custom-api.custom-api': PluginCustomApiCustomApi;
       'api::address-detail.address-detail': ApiAddressDetailAddressDetail;
       'api::attendance-info.attendance-info': ApiAttendanceInfoAttendanceInfo;
       'api::bank-detail.bank-detail': ApiBankDetailBankDetail;
@@ -1812,6 +2002,8 @@ declare module '@strapi/types' {
       'api::employee-past-position.employee-past-position': ApiEmployeePastPositionEmployeePastPosition;
       'api::employment-position.employment-position': ApiEmploymentPositionEmploymentPosition;
       'api::employment-status.employment-status': ApiEmploymentStatusEmploymentStatus;
+      'api::lead-company.lead-company': ApiLeadCompanyLeadCompany;
+      'api::lead-stage.lead-stage': ApiLeadStageLeadStage;
       'api::leave-detail.leave-detail': ApiLeaveDetailLeaveDetail;
       'api::lunch.lunch': ApiLunchLunch;
       'api::performance-appraisal.performance-appraisal': ApiPerformanceAppraisalPerformanceAppraisal;

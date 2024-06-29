@@ -16,10 +16,28 @@ export interface GenderGender extends Schema.Component {
   };
 }
 
+export interface LeadLogsLead extends Schema.Component {
+  collectionName: 'components_lead_logs_leads';
+  info: {
+    displayName: 'Lead';
+    description: '';
+  };
+  attributes: {
+    activityDescription: Attribute.String;
+    assignedEmployee: Attribute.Relation<
+      'lead-logs.lead',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    activityDateTime: Attribute.DateTime;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'gender.gender': GenderGender;
+      'lead-logs.lead': LeadLogsLead;
     }
   }
 }

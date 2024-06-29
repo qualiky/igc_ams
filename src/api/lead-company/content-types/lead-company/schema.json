@@ -1,0 +1,133 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lead_companies",
+  "info": {
+    "singularName": "lead-company",
+    "pluralName": "lead-companies",
+    "displayName": "LeadCompany",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "leadCompanyName": {
+      "type": "string"
+    },
+    "leadApproachPlatform": {
+      "type": "enumeration",
+      "enum": [
+        "Facebook",
+        "Messenger",
+        "Instagram",
+        "LinkedIn",
+        "WhatsApp",
+        "Google Maps",
+        "Website",
+        "Team Member",
+        "Company Number",
+        "Company Email",
+        "Other Platform"
+      ]
+    },
+    "leadApproachPlatformOther": {
+      "type": "string"
+    },
+    "leadApproachSource": {
+      "type": "enumeration",
+      "enum": [
+        "Ads",
+        "Client Reference",
+        "SM Post",
+        "Offline Platform",
+        "Other"
+      ]
+    },
+    "leadApproachedEmployee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "leadContactPersonName": {
+      "type": "string"
+    },
+    "leadContactPhoneNumber": {
+      "type": "string"
+    },
+    "leadContactEmail": {
+      "type": "email"
+    },
+    "remarks": {
+      "type": "blocks"
+    },
+    "leadOfferings": {
+      "type": "blocks"
+    },
+    "leadStatus": {
+      "type": "enumeration",
+      "enum": [
+        "Lead Contacted Team",
+        "Team Contacted Lead",
+        "Phone Conversation",
+        "First Meeting",
+        "Quote Sent",
+        "Client Interested",
+        "Verbal Confirmation",
+        "Final Meeting",
+        "Contract Signing",
+        "Advance Pending",
+        "Advance Received",
+        "Client Rejected by Agency",
+        "Agency Rejected by Client"
+      ]
+    },
+    "approachDate": {
+      "type": "date"
+    },
+    "sentQuotesAndDocuments": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "nextStep": {
+      "type": "enumeration",
+      "enum": [
+        "Make a Call with the Lead",
+        "Send Quote",
+        "Go For a Meeting",
+        "Send Client Location For Meeting",
+        "Follow up on sent Quote",
+        "Send Contract",
+        "Assign Account"
+      ]
+    },
+    "leadStage": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::lead-stage.lead-stage",
+      "inversedBy": "leadCompanies"
+    },
+    "leadLogs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "lead-logs.lead"
+    },
+    "priority": {
+      "type": "enumeration",
+      "enum": [
+        "Low",
+        "Medium",
+        "High",
+        "Critical",
+        "None"
+      ]
+    }
+  }
+}
