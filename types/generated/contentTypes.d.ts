@@ -1006,6 +1006,7 @@ export interface ApiClientClient extends Schema.CollectionType {
     singularName: 'client';
     pluralName: 'clients';
     displayName: 'client';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1015,6 +1016,11 @@ export interface ApiClientClient extends Schema.CollectionType {
     clientContactNumber: Attribute.String;
     clientEmail: Attribute.Email;
     clientAddress: Attribute.String;
+    lead: Attribute.Relation<
+      'api::client.client',
+      'oneToOne',
+      'api::lead-company.lead-company'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1515,6 +1521,11 @@ export interface ApiLeadCompanyLeadCompany extends Schema.CollectionType {
     leadLogs: Attribute.Component<'lead-logs.lead', true>;
     priority: Attribute.Enumeration<
       ['Low', 'Medium', 'High', 'Critical', 'None']
+    >;
+    client: Attribute.Relation<
+      'api::lead-company.lead-company',
+      'oneToOne',
+      'api::client.client'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
