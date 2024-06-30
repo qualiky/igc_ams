@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "project_stages",
+  "info": {
+    "singularName": "project-stage",
+    "pluralName": "project-stages",
+    "displayName": "Project Stage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "projectStageName": {
+      "type": "string"
+    },
+    "projectTasks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project-task.project-task",
+      "mappedBy": "projectStage"
+    },
+    "project": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project.project",
+      "inversedBy": "projectStages"
+    }
+  }
+}

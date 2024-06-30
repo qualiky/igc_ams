@@ -33,11 +33,24 @@ export interface LeadLogsLead extends Schema.Component {
   };
 }
 
+export interface ProjectProjectStages extends Schema.Component {
+  collectionName: 'components_project_project_stages';
+  info: {
+    displayName: 'Project Update';
+    description: '';
+  };
+  attributes: {
+    projectDescription: Attribute.Text;
+    updateDateTime: Attribute.Date;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'gender.gender': GenderGender;
       'lead-logs.lead': LeadLogsLead;
+      'project.project-stages': ProjectProjectStages;
     }
   }
 }

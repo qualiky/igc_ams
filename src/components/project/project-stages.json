@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_project_project_stages",
+  "info": {
+    "displayName": "Project Update",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "projectDescription": {
+      "type": "text"
+    },
+    "updateDateTime": {
+      "type": "date"
+    }
+  }
+}

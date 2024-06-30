@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "clientName": {
+    "companyName": {
       "type": "string"
     },
     "clientContactNumber": {
@@ -29,6 +29,21 @@
       "relation": "oneToOne",
       "target": "api::lead-company.lead-company",
       "inversedBy": "client"
+    },
+    "clientContactPersonName": {
+      "type": "string"
+    },
+    "clientContactPersonNumber": {
+      "type": "string"
+    },
+    "clientContactPersonEmail": {
+      "type": "email"
+    },
+    "projects": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project.project",
+      "mappedBy": "client"
     }
   }
 }

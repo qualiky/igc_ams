@@ -1012,7 +1012,7 @@ export interface ApiClientClient extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    clientName: Attribute.String;
+    companyName: Attribute.String;
     clientContactNumber: Attribute.String;
     clientEmail: Attribute.Email;
     clientAddress: Attribute.String;
@@ -1020,6 +1020,14 @@ export interface ApiClientClient extends Schema.CollectionType {
       'api::client.client',
       'oneToOne',
       'api::lead-company.lead-company'
+    >;
+    clientContactPersonName: Attribute.String;
+    clientContactPersonNumber: Attribute.String;
+    clientContactPersonEmail: Attribute.Email;
+    projects: Attribute.Relation<
+      'api::client.client',
+      'oneToMany',
+      'api::project.project'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1032,6 +1040,47 @@ export interface ApiClientClient extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::client.client',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCommentComment extends Schema.CollectionType {
+  collectionName: 'comments';
+  info: {
+    singularName: 'comment';
+    pluralName: 'comments';
+    displayName: 'Comment';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    comment: Attribute.RichText;
+    commenter: Attribute.Relation<
+      'api::comment.comment',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    commentId: Attribute.UID;
+    projectTask: Attribute.Relation<
+      'api::comment.comment',
+      'manyToOne',
+      'api::project-task.project-task'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::comment.comment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::comment.comment',
       'oneToOne',
       'admin::user'
     > &
@@ -1214,6 +1263,11 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       'api::employee.employee',
       'oneToMany',
       'api::attendance-info.attendance-info'
+    >;
+    projectTasks: Attribute.Relation<
+      'api::employee.employee',
+      'manyToOne',
+      'api::project-task.project-task'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1970,6 +2024,179 @@ export interface ApiPersonalIdentificationInfoPersonalIdentificationInfo
   };
 }
 
+export interface ApiProjectProject extends Schema.CollectionType {
+  collectionName: 'projects';
+  info: {
+    singularName: 'project';
+    pluralName: 'projects';
+    displayName: 'Project';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    projectName: Attribute.String;
+    projectDescription: Attribute.RichText;
+    startDate: Attribute.Date;
+    client: Attribute.Relation<
+      'api::project.project',
+      'manyToOne',
+      'api::client.client'
+    >;
+    projectUpdates: Attribute.Component<'project.project-stages', true>;
+    projectLead: Attribute.Relation<
+      'api::project.project',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    projectStages: Attribute.Relation<
+      'api::project.project',
+      'oneToMany',
+      'api::project-stage.project-stage'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::project.project',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::project.project',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProjectStageProjectStage extends Schema.CollectionType {
+  collectionName: 'project_stages';
+  info: {
+    singularName: 'project-stage';
+    pluralName: 'project-stages';
+    displayName: 'Project Stage';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    projectStageName: Attribute.String;
+    projectTasks: Attribute.Relation<
+      'api::project-stage.project-stage',
+      'oneToMany',
+      'api::project-task.project-task'
+    >;
+    project: Attribute.Relation<
+      'api::project-stage.project-stage',
+      'manyToOne',
+      'api::project.project'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::project-stage.project-stage',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::project-stage.project-stage',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProjectTaskProjectTask extends Schema.CollectionType {
+  collectionName: 'project_tasks';
+  info: {
+    singularName: 'project-task';
+    pluralName: 'project-tasks';
+    displayName: 'Project Task';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    taskId: Attribute.UID;
+    taskTitle: Attribute.String;
+    tags: Attribute.Relation<
+      'api::project-task.project-task',
+      'manyToMany',
+      'api::tag.tag'
+    >;
+    startDate: Attribute.DateTime;
+    endDate: Attribute.DateTime;
+    priority: Attribute.Enumeration<['Low', 'Medium', 'High', 'Urgent']>;
+    teamMembers: Attribute.Relation<
+      'api::project-task.project-task',
+      'oneToMany',
+      'api::employee.employee'
+    >;
+    comments: Attribute.Relation<
+      'api::project-task.project-task',
+      'oneToMany',
+      'api::comment.comment'
+    >;
+    taskDescription: Attribute.RichText;
+    projectStage: Attribute.Relation<
+      'api::project-task.project-task',
+      'manyToOne',
+      'api::project-stage.project-stage'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::project-task.project-task',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::project-task.project-task',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTagTag extends Schema.CollectionType {
+  collectionName: 'tags';
+  info: {
+    singularName: 'tag';
+    pluralName: 'tags';
+    displayName: 'Tag';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    tagTitle: Attribute.UID;
+    tasks: Attribute.Relation<
+      'api::tag.tag',
+      'manyToMany',
+      'api::project-task.project-task'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiYearlyLeaveDetailYearlyLeaveDetail
   extends Schema.CollectionType {
   collectionName: 'yearly_leave_details';
@@ -2039,6 +2266,7 @@ declare module '@strapi/types' {
       'api::attendance-info.attendance-info': ApiAttendanceInfoAttendanceInfo;
       'api::bank-detail.bank-detail': ApiBankDetailBankDetail;
       'api::client.client': ApiClientClient;
+      'api::comment.comment': ApiCommentComment;
       'api::company.company': ApiCompanyCompany;
       'api::educational-qualification.educational-qualification': ApiEducationalQualificationEducationalQualification;
       'api::employee.employee': ApiEmployeeEmployee;
@@ -2053,6 +2281,10 @@ declare module '@strapi/types' {
       'api::lunch.lunch': ApiLunchLunch;
       'api::performance-appraisal.performance-appraisal': ApiPerformanceAppraisalPerformanceAppraisal;
       'api::personal-identification-info.personal-identification-info': ApiPersonalIdentificationInfoPersonalIdentificationInfo;
+      'api::project.project': ApiProjectProject;
+      'api::project-stage.project-stage': ApiProjectStageProjectStage;
+      'api::project-task.project-task': ApiProjectTaskProjectTask;
+      'api::tag.tag': ApiTagTag;
       'api::yearly-leave-detail.yearly-leave-detail': ApiYearlyLeaveDetailYearlyLeaveDetail;
     }
   }

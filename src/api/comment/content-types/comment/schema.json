@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comments",
+  "info": {
+    "singularName": "comment",
+    "pluralName": "comments",
+    "displayName": "Comment"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "comment": {
+      "type": "richtext"
+    },
+    "commenter": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "commentId": {
+      "type": "uid"
+    },
+    "projectTask": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project-task.project-task",
+      "inversedBy": "comments"
+    }
+  }
+}

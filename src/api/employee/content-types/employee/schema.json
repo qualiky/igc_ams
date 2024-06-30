@@ -146,6 +146,12 @@
       "relation": "oneToMany",
       "target": "api::attendance-info.attendance-info",
       "mappedBy": "attendingEmployeeId"
+    },
+    "projectTasks": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project-task.project-task",
+      "inversedBy": "teamMembers"
     }
   }
 }
