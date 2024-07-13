@@ -111,6 +111,9 @@ const config = {
   tutorials: false,
   // Disable notifications about new Strapi releases
   notifications: { releases: false },
+  head: {
+    favicon: "./uploads/favicon_0dba5ffdf8.ico",
+  },
 };
 
 const bootstrap = (app) => {
