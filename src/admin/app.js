@@ -1,3 +1,5 @@
+import favicon from "./extensions/favicon.ico";
+
 const config = {
   locales: [
     // 'ar',
@@ -112,7 +114,7 @@ const config = {
   // Disable notifications about new Strapi releases
   notifications: { releases: false },
   head: {
-    favicon: "./uploads/favicon_0dba5ffdf8.ico",
+    favicon: favicon,
   },
 };
 
