@@ -14,4 +14,5 @@ module.exports = [
     name: "strapi::favicon",
     config: "./uploads/favicon_0dba5ffdf8.ico",
   },
+  { resolve: "./src/middlewares/cmredirector" },
 ];
