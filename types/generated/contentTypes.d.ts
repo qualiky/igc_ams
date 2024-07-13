@@ -1029,6 +1029,8 @@ export interface ApiClientClient extends Schema.CollectionType {
       'oneToMany',
       'api::project.project'
     >;
+    logo: Attribute.Media;
+    contactDocument: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
