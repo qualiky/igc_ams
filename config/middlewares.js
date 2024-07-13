@@ -12,6 +12,6 @@ module.exports = [
   { name: "global::admin-redirect" },
   {
     name: "strapi::favicon",
-    config: "https://admin.pirus.app/uploads/favicon_0dba5ffdf8.ico",
+    config: "./uploads/favicon_0dba5ffdf8.ico",
   },
 ];
