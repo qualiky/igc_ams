@@ -152,6 +152,12 @@
       "relation": "manyToOne",
       "target": "api::project-task.project-task",
       "inversedBy": "teamMembers"
+    },
+    "receipts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::receipt.receipt",
+      "mappedBy": "employee"
     }
   }
 }

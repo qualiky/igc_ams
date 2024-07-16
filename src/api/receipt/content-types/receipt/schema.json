@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "receipts",
+  "info": {
+    "singularName": "receipt",
+    "pluralName": "receipts",
+    "displayName": "Receipt"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "amount": {
+      "type": "decimal"
+    },
+    "receiptType": {
+      "type": "enumeration",
+      "enum": [
+        "Income",
+        "Expenditure"
+      ]
+    },
+    "transactionType": {
+      "type": "enumeration",
+      "enum": [
+        "Rent",
+        "Utilities",
+        "Salaries",
+        "Wages",
+        "Marketing",
+        "Advertising",
+        "Office Supplies",
+        "Raw Materials",
+        "Equipment Maintenance",
+        "Insurance",
+        "Taxes",
+        "Travel Expenses",
+        "Professional Fees",
+        "Loan Interest",
+        "Depreciation",
+        "Sales Revenue",
+        "Service Fees",
+        "Interest Income",
+        "Dividend Income",
+        "Rental Income",
+        "Royalties",
+        "Commissions",
+        "Grants",
+        "Subsidies",
+        "Refunds",
+        "Investment Income",
+        "Membership Fees"
+      ]
+    },
+    "description": {
+      "type": "text"
+    },
+    "attachment": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "receipts"
+    }
+  }
+}

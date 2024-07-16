@@ -1276,6 +1276,11 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       'manyToOne',
       'api::project-task.project-task'
     >;
+    receipts: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::receipt.receipt'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -2182,6 +2187,76 @@ export interface ApiProjectTaskProjectTask extends Schema.CollectionType {
   };
 }
 
+export interface ApiReceiptReceipt extends Schema.CollectionType {
+  collectionName: 'receipts';
+  info: {
+    singularName: 'receipt';
+    pluralName: 'receipts';
+    displayName: 'Receipt';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    amount: Attribute.Decimal;
+    receiptType: Attribute.Enumeration<['Income', 'Expenditure']>;
+    transactionType: Attribute.Enumeration<
+      [
+        'Rent',
+        'Utilities',
+        'Salaries',
+        'Wages',
+        'Marketing',
+        'Advertising',
+        'Office Supplies',
+        'Raw Materials',
+        'Equipment Maintenance',
+        'Insurance',
+        'Taxes',
+        'Travel Expenses',
+        'Professional Fees',
+        'Loan Interest',
+        'Depreciation',
+        'Sales Revenue',
+        'Service Fees',
+        'Interest Income',
+        'Dividend Income',
+        'Rental Income',
+        'Royalties',
+        'Commissions',
+        'Grants',
+        'Subsidies',
+        'Refunds',
+        'Investment Income',
+        'Membership Fees'
+      ]
+    >;
+    description: Attribute.Text;
+    attachment: Attribute.Media;
+    employee: Attribute.Relation<
+      'api::receipt.receipt',
+      'manyToOne',
+      'api::employee.employee'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::receipt.receipt',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::receipt.receipt',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiTagTag extends Schema.CollectionType {
   collectionName: 'tags';
   info: {
@@ -2356,6 +2431,7 @@ declare module '@strapi/types' {
       'api::project.project': ApiProjectProject;
       'api::project-stage.project-stage': ApiProjectStageProjectStage;
       'api::project-task.project-task': ApiProjectTaskProjectTask;
+      'api::receipt.receipt': ApiReceiptReceipt;
       'api::tag.tag': ApiTagTag;
       'api::ticket.ticket': ApiTicketTicket;
       'api::yearly-leave-detail.yearly-leave-detail': ApiYearlyLeaveDetailYearlyLeaveDetail;
