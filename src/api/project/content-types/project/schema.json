@@ -42,6 +42,12 @@
       "relation": "oneToMany",
       "target": "api::project-stage.project-stage",
       "mappedBy": "project"
+    },
+    "tickets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ticket.ticket",
+      "mappedBy": "project"
     }
   }
 }

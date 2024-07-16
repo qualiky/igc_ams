@@ -71,6 +71,12 @@
       ],
       "type": "media",
       "multiple": true
+    },
+    "ticket": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::ticket.ticket",
+      "mappedBy": "user"
     }
   }
 }

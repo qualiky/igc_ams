@@ -46,17 +46,12 @@
       "mappedBy": "client"
     },
     "logo": {
-      "allowedTypes": [
-        "images"
-      ],
+      "allowedTypes": ["images"],
       "type": "media",
       "multiple": false
     },
-    "contactDocument": {
-      "allowedTypes": [
-        "files",
-        "images"
-      ],
+    "contractDocument": {
+      "allowedTypes": ["files", "images"],
       "type": "media",
       "multiple": true
     }

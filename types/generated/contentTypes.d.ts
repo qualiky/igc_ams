@@ -771,6 +771,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.role'
     >;
     profileImage: Attribute.Media;
+    ticket: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::ticket.ticket'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1030,7 +1035,7 @@ export interface ApiClientClient extends Schema.CollectionType {
       'api::project.project'
     >;
     logo: Attribute.Media;
-    contactDocument: Attribute.Media;
+    contractDocument: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -2057,6 +2062,11 @@ export interface ApiProjectProject extends Schema.CollectionType {
       'oneToMany',
       'api::project-stage.project-stage'
     >;
+    tickets: Attribute.Relation<
+      'api::project.project',
+      'oneToMany',
+      'api::ticket.ticket'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -2199,6 +2209,66 @@ export interface ApiTagTag extends Schema.CollectionType {
   };
 }
 
+export interface ApiTicketTicket extends Schema.CollectionType {
+  collectionName: 'tickets';
+  info: {
+    singularName: 'ticket';
+    pluralName: 'tickets';
+    displayName: 'Ticket';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+    project: Attribute.Relation<
+      'api::ticket.ticket',
+      'manyToOne',
+      'api::project.project'
+    >;
+    attachments: Attribute.Media;
+    user: Attribute.Relation<
+      'api::ticket.ticket',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    ticket: Attribute.Relation<
+      'api::ticket.ticket',
+      'manyToOne',
+      'api::ticket.ticket'
+    >;
+    replies: Attribute.Relation<
+      'api::ticket.ticket',
+      'oneToMany',
+      'api::ticket.ticket'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ticket.ticket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ticket.ticket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiYearlyLeaveDetailYearlyLeaveDetail
   extends Schema.CollectionType {
   collectionName: 'yearly_leave_details';
@@ -2287,6 +2357,7 @@ declare module '@strapi/types' {
       'api::project-stage.project-stage': ApiProjectStageProjectStage;
       'api::project-task.project-task': ApiProjectTaskProjectTask;
       'api::tag.tag': ApiTagTag;
+      'api::ticket.ticket': ApiTicketTicket;
       'api::yearly-leave-detail.yearly-leave-detail': ApiYearlyLeaveDetailYearlyLeaveDetail;
     }
   }
