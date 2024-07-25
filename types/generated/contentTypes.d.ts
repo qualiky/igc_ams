@@ -776,6 +776,8 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToOne',
       'api::ticket.ticket'
     >;
+    firstName: Attribute.String;
+    lastName: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1060,6 +1062,7 @@ export interface ApiCommentComment extends Schema.CollectionType {
     singularName: 'comment';
     pluralName: 'comments';
     displayName: 'Comment';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1071,7 +1074,6 @@ export interface ApiCommentComment extends Schema.CollectionType {
       'oneToOne',
       'api::employee.employee'
     >;
-    commentId: Attribute.UID;
     projectTask: Attribute.Relation<
       'api::comment.comment',
       'manyToOne',
@@ -2318,7 +2320,7 @@ export interface ApiTicketTicket extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    ticket: Attribute.Relation<
+    parent: Attribute.Relation<
       'api::ticket.ticket',
       'manyToOne',
       'api::ticket.ticket'
@@ -2328,6 +2330,7 @@ export interface ApiTicketTicket extends Schema.CollectionType {
       'oneToMany',
       'api::ticket.ticket'
     >;
+    priority: Attribute.Enumeration<['Urgent', 'High', 'Medium', 'Low']>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

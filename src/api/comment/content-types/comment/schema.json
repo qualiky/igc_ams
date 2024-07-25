@@ -4,7 +4,8 @@
   "info": {
     "singularName": "comment",
     "pluralName": "comments",
-    "displayName": "Comment"
+    "displayName": "Comment",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,10 +18,7 @@
     "commenter": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::employee.employee"
-    },
-    "commentId": {
-      "type": "uid"
+      "target": "plugin::users-permissions.user"
     },
     "projectTask": {
       "type": "relation",
