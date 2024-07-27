@@ -2193,6 +2193,7 @@ export interface ApiReceiptReceipt extends Schema.CollectionType {
     singularName: 'receipt';
     pluralName: 'receipts';
     displayName: 'Receipt';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -2239,6 +2240,7 @@ export interface ApiReceiptReceipt extends Schema.CollectionType {
       'manyToOne',
       'api::employee.employee'
     >;
+    billedDate: Attribute.Date;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
