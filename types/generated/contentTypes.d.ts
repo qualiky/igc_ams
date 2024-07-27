@@ -1532,6 +1532,28 @@ export interface ApiEmploymentStatusEmploymentStatus
   };
 }
 
+export interface ApiHomeHome extends Schema.SingleType {
+  collectionName: 'homes';
+  info: {
+    singularName: 'home';
+    pluralName: 'homes';
+    displayName: 'home';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiLeadCompanyLeadCompany extends Schema.CollectionType {
   collectionName: 'lead_companies';
   info: {
@@ -2450,6 +2472,7 @@ declare module '@strapi/types' {
       'api::employee-past-position.employee-past-position': ApiEmployeePastPositionEmployeePastPosition;
       'api::employment-position.employment-position': ApiEmploymentPositionEmploymentPosition;
       'api::employment-status.employment-status': ApiEmploymentStatusEmploymentStatus;
+      'api::home.home': ApiHomeHome;
       'api::lead-company.lead-company': ApiLeadCompanyLeadCompany;
       'api::lead-stage.lead-stage': ApiLeadStageLeadStage;
       'api::leave-detail.leave-detail': ApiLeaveDetailLeaveDetail;
