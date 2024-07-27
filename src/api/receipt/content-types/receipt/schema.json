@@ -4,7 +4,8 @@
   "info": {
     "singularName": "receipt",
     "pluralName": "receipts",
-    "displayName": "Receipt"
+    "displayName": "Receipt",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -61,18 +62,22 @@
       "type": "text"
     },
     "attachment": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "employee": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::employee.employee",
       "inversedBy": "receipts"
+    },
+    "billedDate": {
+      "type": "date"
     }
   }
 }

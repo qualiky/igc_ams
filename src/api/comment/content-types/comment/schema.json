@@ -4,7 +4,8 @@
   "info": {
     "singularName": "comment",
     "pluralName": "comments",
-    "displayName": "Comment"
+    "displayName": "Comment",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,19 +15,24 @@
     "comment": {
       "type": "richtext"
     },
-    "commenter": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::employee.employee"
-    },
-    "commentId": {
-      "type": "uid"
-    },
     "projectTask": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::project-task.project-task",
       "inversedBy": "comments"
+    },
+    "commentingUser": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "commentId": {
+      "type": "customField",
+      "options": {
+        "uuid-format": ""
+      },
+      "customField": "plugin::strapi-advanced-uuid.uuid"
     }
   }
 }
+

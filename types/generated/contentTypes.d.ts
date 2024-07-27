@@ -776,6 +776,13 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToOne',
       'api::ticket.ticket'
     >;
+    firstName: Attribute.String;
+    lastName: Attribute.String;
+    employee: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::employee.employee'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1060,23 +1067,36 @@ export interface ApiCommentComment extends Schema.CollectionType {
     singularName: 'comment';
     pluralName: 'comments';
     displayName: 'Comment';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     comment: Attribute.RichText;
-    commenter: Attribute.Relation<
-      'api::comment.comment',
-      'oneToOne',
-      'api::employee.employee'
-    >;
-    commentId: Attribute.UID;
     projectTask: Attribute.Relation<
       'api::comment.comment',
       'manyToOne',
       'api::project-task.project-task'
     >;
+    commentingUser: Attribute.Relation<
+      'api::comment.comment',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    commentId: Attribute.UID<
+      undefined,
+      undefined,
+      {
+        'uuid-format': '';
+      }
+    > &
+      Attribute.CustomField<
+        'plugin::strapi-advanced-uuid.uuid',
+        {
+          'uuid-format': '';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1280,6 +1300,11 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       'api::employee.employee',
       'oneToMany',
       'api::receipt.receipt'
+    >;
+    user: Attribute.Relation<
+      'api::employee.employee',
+      'oneToOne',
+      'plugin::users-permissions.user'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -2193,6 +2218,7 @@ export interface ApiReceiptReceipt extends Schema.CollectionType {
     singularName: 'receipt';
     pluralName: 'receipts';
     displayName: 'Receipt';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -2239,6 +2265,7 @@ export interface ApiReceiptReceipt extends Schema.CollectionType {
       'manyToOne',
       'api::employee.employee'
     >;
+    billedDate: Attribute.Date;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -2316,7 +2343,7 @@ export interface ApiTicketTicket extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    ticket: Attribute.Relation<
+    parent: Attribute.Relation<
       'api::ticket.ticket',
       'manyToOne',
       'api::ticket.ticket'
@@ -2326,6 +2353,7 @@ export interface ApiTicketTicket extends Schema.CollectionType {
       'oneToMany',
       'api::ticket.ticket'
     >;
+    priority: Attribute.Enumeration<['Urgent', 'High', 'Medium', 'Low']>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

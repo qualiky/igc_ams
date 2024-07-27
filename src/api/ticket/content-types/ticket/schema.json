@@ -47,7 +47,7 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "ticket"
     },
-    "ticket": {
+    "parent": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::ticket.ticket",
@@ -57,7 +57,16 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::ticket.ticket",
-      "mappedBy": "ticket"
+      "mappedBy": "parent"
+    },
+    "priority": {
+      "type": "enumeration",
+      "enum": [
+        "Urgent",
+        "High",
+        "Medium",
+        "Low"
+      ]
     }
   }
 }

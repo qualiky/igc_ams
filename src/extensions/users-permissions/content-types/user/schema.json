@@ -66,16 +66,29 @@
       "configurable": false
     },
     "profileImage": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "ticket": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::ticket.ticket",
+      "mappedBy": "user"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee",
       "mappedBy": "user"
     }
   }
