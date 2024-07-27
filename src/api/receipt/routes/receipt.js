@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 /**
  * receipt router
  */
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
+const { createCoreRouter } = require("@strapi/strapi").factories;
 
-module.exports = createCoreRouter('api::receipt.receipt');
+module.exports = createCoreRouter("api::receipt.receipt");
