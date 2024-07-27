@@ -19,7 +19,7 @@
       "type": "richtext"
     },
     "startDate": {
-      "type": "date"
+      "type": "datetime"
     },
     "client": {
       "type": "relation",
@@ -48,6 +48,9 @@
       "relation": "oneToMany",
       "target": "api::ticket.ticket",
       "mappedBy": "project"
+    },
+    "endDate": {
+      "type": "datetime"
     }
   }
 }

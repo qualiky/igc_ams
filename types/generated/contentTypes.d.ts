@@ -2097,7 +2097,7 @@ export interface ApiProjectProject extends Schema.CollectionType {
   attributes: {
     projectName: Attribute.String;
     projectDescription: Attribute.RichText;
-    startDate: Attribute.Date;
+    startDate: Attribute.DateTime;
     client: Attribute.Relation<
       'api::project.project',
       'manyToOne',
@@ -2119,6 +2119,7 @@ export interface ApiProjectProject extends Schema.CollectionType {
       'oneToMany',
       'api::ticket.ticket'
     >;
+    endDate: Attribute.DateTime;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
