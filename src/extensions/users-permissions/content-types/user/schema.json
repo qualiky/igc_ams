@@ -84,6 +84,12 @@
     },
     "lastName": {
       "type": "string"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee",
+      "mappedBy": "user"
     }
   }
 }
